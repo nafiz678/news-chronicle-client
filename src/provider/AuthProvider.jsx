@@ -17,58 +17,59 @@ const AuthProvider = ({ children }) => {
 
     const provider = new GoogleAuthProvider();
 
-    const googleSignIn = () =>{
+    const googleSignIn = () => {
         setLoading(true)
         return signInWithPopup(auth, provider)
     }
 
-    const signin = (email, password)=>{
+    const signin = (email, password) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    const logOut = () =>{
+    const logOut = () => {
         setLoading(true)
         return signOut(auth);
     }
 
-    const createUser = (email, password)=>{
+    const createUser = (email, password) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
-    const updateUser = (info) =>{
-        return updateProfile(auth.currentUser, info)
+    const updateUser = (name, photo) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: photo,
+        })
     }
 
-    useEffect(()=>{
-       const unsubscribe =  onAuthStateChanged(auth, currentUser=>{
-            setUser(currentUser)
-            setLoading(false)
-            if(currentUser)
-            {
-                const userInfo = {email: currentUser.email, }
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            if (currentUser?.email) {
+                setUser(currentUser)
+                const userInfo = { email: currentUser.email, }
                 // get token and store client
                 axiosPublic.post("/jwt", userInfo)
-                .then(res=>{
-                    if(res.data.token)
-                    {
-                        localStorage.setItem("access-token", res.data.token)
-                        setLoading(false)
-                    }
-                })
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem("access-token", res.data.token)
+                            setLoading(false)
+                        }
+                    })
 
-            }else{
+            } else {
+                setUser(currentUser)
                 //todo: clear cookie by calling logout api(if token stored in client side)
                 localStorage.removeItem("access-token")
                 setLoading(false)
             }
         })
 
-        return ()=>{
+        return () => {
             return unsubscribe();
         }
-    },[axiosPublic])
+    }, [axiosPublic])
 
     const authInfo = {
         user,
@@ -79,6 +80,7 @@ const AuthProvider = ({ children }) => {
         updateUser,
         setUser,
         googleSignIn,
+        setLoading,
     }
 
     return (

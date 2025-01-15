@@ -6,8 +6,9 @@ import user2 from "@/assets/user.png"
 import useAuth from '@/hooks/useAuth';
 
 function Navbar() {
-    const { user, loader, logOut } = useAuth()
+    const { user, loading, logOut } = useAuth()
 
+    if (loading) return
     return (
         <div className="navbar md:w-11/12 mx-auto justify-between">
             <div className="justify-start ">
@@ -64,20 +65,18 @@ function Navbar() {
             </div>
             {/* login or signup methods */}
             {user ?
-                ""
+                <button onClick={() => logOut()} className="px-6 hidden lg:inline-block py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Logout</button>
                 :
                 <Link to="/login" className="px-6 hidden lg:inline-block py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Login</Link>}
             <div className="dropdown hidden lg:inline-block dropdown-hover">
                 <div tabIndex={0} role="button" className="p-1 border rounded-full border-gray-400">
-                    {user ? <img className='w-8 h-8 rounded-full object-cover' src={user.photoURL} referrerPolicy='no-referrer' alt="" />
-                        :
-                        <img className='w-8 h-8' src={user2} alt="" />}
+                    <img src={user && user.photoURL ? user.photoURL : user2} className='w-8 h-8 rounded-full object-cover' alt="" />
                 </div>
                 <ul tabIndex={0} className="dropdown-content bg-white/55 absolute top-10 right-0 w-52 menu rounded-box z-[1] p-2 shadow">
 
                     <div>
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/my-articles"}>My Articles</NavLink></li>
-                        <button onClick={()=> logOut()} className="px-6 hidden lg:inline-block py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Logout</button>
+
                         <ModeToggle></ModeToggle>
                     </div>
                 </ul>

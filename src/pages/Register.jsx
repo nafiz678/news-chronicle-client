@@ -1,13 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import useAuth from '@/hooks/useAuth'
-import { imageUpload } from '@/api/Utils'
+import { imageUpload, saveUser } from '@/api/Utils'
 import { Helmet } from 'react-helmet-async'
 import { FaGoogle } from 'react-icons/fa'
 import Loader from '@/shared/LoaderSpinner'
 
 const SignUp = () => {
-    const { createUser, updateUser, googleSignIn, loading } = useAuth()
+    const { createUser, updateUser, googleSignIn, setUser, loading } = useAuth()
     const navigate = useNavigate()
     // form submit handler
     const handleSubmit = async event => {
@@ -23,16 +23,18 @@ const SignUp = () => {
         try {
             //2. User Registration
             const result = await createUser(email, password)
-
             //3. Save username & profile photo
-            const info = { displayName: name, photoURL: imageURL }
-            await updateUser(info)
+            await updateUser(name, imageURL)
             console.log(result)
+            const user = result.user
+            const newUser = { ...user, name, imageURL }
+            setUser(newUser)
 
             // save user info in db if the user is new
-            //   await saveUser({...result?.user,displayName:name, photoURL: imageURL })
+            await saveUser({ ...result?.user, displayName: name, photoURL: imageURL })
+            setUser(result.user)
 
-              navigate('/')
+            navigate('/')
             toast.success('Signup Successful')
         } catch (err) {
             console.log(err)
@@ -46,7 +48,7 @@ const SignUp = () => {
             //User Registration using google
             const data = await googleSignIn()
             // save user info in db if the user is new
-            //   await saveUser(data?.user)
+            await saveUser(data?.user)
 
             navigate('/')
             toast.success('Signup Successful')
@@ -56,7 +58,7 @@ const SignUp = () => {
         }
     }
 
-    if(loading) return <div className='flex items-center justify-center h-screen'><Loader></Loader></div>
+    if (loading) return <div className='flex items-center justify-center h-screen'><Loader></Loader></div>
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <Helmet>

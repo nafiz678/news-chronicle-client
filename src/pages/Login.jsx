@@ -3,8 +3,9 @@ import { FaGoogle } from "react-icons/fa";
 import useAuth from "@/hooks/useAuth";
 import Loader from "@/shared/LoaderSpinner";
 import toast from "react-hot-toast";
+import { saveUser } from "@/api/Utils";
 const Login = () => {
-    const { signIn, googleSignIn, loading, user } = useAuth()
+    const { signin, googleSignIn, loading, user } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname || '/'
@@ -19,7 +20,7 @@ const Login = () => {
 
         try {
             //User Login
-            await signIn(email, password)
+            await signin(email, password)
             navigate(from, { replace: true })
             toast.success('Login Successful')
         } catch (err) {
@@ -29,10 +30,19 @@ const Login = () => {
     }
 
 
-    const handleGoogle = () => {
-        // e.preventDefault()
-        googleSignIn()
-        console.log("google login")
+    const handleGoogle = async () => {
+        try {
+            //User Registration using google
+            const data = await googleSignIn()
+            // save user info in db if the user is new
+            await saveUser(data?.user)
+      
+            navigate(from, { replace: true })
+            toast.success('Login Successful')
+          } catch (err) {
+            console.log(err)
+            toast.error(err?.message)
+          }
     }
 
     return (
