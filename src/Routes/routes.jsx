@@ -4,6 +4,8 @@ import Home from "@/pages/Home";
 import AddArticles from "@/pages/AddArticles";
 import AllArticles from "@/pages/AllArticles";
 import Dashboard from "@/pages/Dashboard";
+import Subscription from "@/pages/Subscription";
+import MyArticles from "@/pages/MyArticles";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
         {
             path: "/dashboard",
             element: <Dashboard></Dashboard>
+        },
+        {
+            path: "/subscription",
+            element: <Subscription></Subscription>
+        },
+        {
+            path: "/my-articles",
+            element: <MyArticles></MyArticles>
         },
       ]
     },

@@ -5,11 +5,17 @@ import Navbar from "../shared/Navbar";
 const MainLayout = () => {
     return (
         <div>
-            <Navbar></Navbar>
-            
-            <div className="h-screen">
+            <nav className="bg-[#E3E3E3]">
+                <Navbar></Navbar>
+            </nav>
+
+            <div className="h-screen ">
                 <Outlet></Outlet>
             </div>
+
+            <footer>
+                ajdlkfjlsjdf
+            </footer>
         </div>
     );
 };
