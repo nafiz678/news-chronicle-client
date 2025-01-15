@@ -60,7 +60,7 @@ const SignUp = () => {
 
     if (loading) return <div className='flex items-center justify-center h-screen'><Loader></Loader></div>
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="my-10 flex items-center justify-center ">
             <Helmet>
                 <title>Register || News Chronicle</title>
             </Helmet>

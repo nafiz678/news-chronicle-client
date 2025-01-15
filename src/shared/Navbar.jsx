@@ -4,6 +4,7 @@ import { ModeToggle } from '@/components/toggle';
 import logo from "@/assets/logo.png"
 import user2 from "@/assets/user.png"
 import useAuth from '@/hooks/useAuth';
+import { Button } from '@/components/ui/button';
 
 function Navbar() {
     const { user, loading, logOut } = useAuth()
@@ -58,33 +59,39 @@ function Navbar() {
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/all-articles"}>All Articles</NavLink></li>
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/add-article"}>Add Articles</NavLink></li>
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/subscription"}>Subscription</NavLink></li>
-                    <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li>
+                    <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/my-articles"}>My Articles</NavLink></li>
+
+                    {/* this will show only for admin */}
+                    {/* <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li> */}
 
 
                 </ul>
             </div>
             {/* login or signup methods */}
             {user ?
-                <button onClick={() => logOut()} className="px-6 hidden lg:inline-block py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Logout</button>
+                <>
+                    <Button size="lg" onClick={() => logOut()} className="px-6 hidden lg:inline-block  dark:text-background font-medium rounded-md shadow-md  transition duration-300 mr-4">Logout</Button>
+                    <Link to={"/my-profile"} className="p-1 bg-gray-600 hover:scale-105 active:scale-95 transition duration-150 ease-in-out rounded-full hidden lg:inline-block ">
+                        <img src={user && user.photoURL ? user.photoURL : user2} className='w-8 h-8 rounded-full object-cover' alt="" />
+                    </Link>
+                </>
                 :
-                <Link to="/login" className="px-6 hidden lg:inline-block py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Login</Link>}
-            <div className="dropdown hidden lg:inline-block dropdown-hover">
-                <div tabIndex={0} role="button" className="p-1 border rounded-full border-gray-400">
-                    <img src={user && user.photoURL ? user.photoURL : user2} className='w-8 h-8 rounded-full object-cover' alt="" />
-                </div>
-                <ul tabIndex={0} className="dropdown-content bg-white/55 absolute top-10 right-0 w-52 menu rounded-box z-[1] p-2 shadow">
+                <>
+                    <Link to="/login" >
+                        <Button size="lg" className=" hidden lg:inline-block py-2  font-medium rounded-md shadow-md  transition duration-300 mr-4">Login</Button>
+                    </Link>
+                    <Link to="/register" >
+                        <Button size="lg" className=" hidden lg:inline-block py-2  font-medium rounded-md shadow-md  transition duration-300 mr-4">Register</Button>
+                    </Link>
+                </>
+            }
 
-                    <div>
-                        <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/my-articles"}>My Articles</NavLink></li>
 
-                        <ModeToggle></ModeToggle>
-                    </div>
-                </ul>
-            </div>
+
+            {/* <ModeToggle></ModeToggle>
             <div className='lg:hidden'>
                 <ModeToggle></ModeToggle>
-            </div>
-
+            </div> */}
         </div>
     );
 }

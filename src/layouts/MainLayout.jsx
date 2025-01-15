@@ -17,7 +17,7 @@ const MainLayout = () => {
                 <Navbar></Navbar>
             </nav>
 
-            <div className="h-screen">
+            <div className="py-16">
                 <Outlet></Outlet>
             </div>
 
