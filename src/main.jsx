@@ -3,15 +3,20 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import router from './Routes/routes.jsx'
-import { MantineProvider } from '@mantine/core'
 import { ThemeProvider } from './provider/theme-provider'
+import AuthProvider from './provider/AuthProvider'
+import { HelmetProvider } from 'react-helmet-async'
+import { Toaster } from 'react-hot-toast'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ThemeProvider storageKey="vite-ui-theme">
-      <MantineProvider>
-        <RouterProvider router={router}></RouterProvider>
-      </MantineProvider>
-    </ThemeProvider>
+    <AuthProvider>
+        <HelmetProvider>
+          <ThemeProvider>
+            <RouterProvider router={router}></RouterProvider>
+            <Toaster />
+          </ThemeProvider>
+        </HelmetProvider>
+    </AuthProvider>
   </StrictMode>,
 )

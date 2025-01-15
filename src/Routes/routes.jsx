@@ -6,6 +6,8 @@ import AllArticles from "@/pages/AllArticles";
 import Dashboard from "@/pages/Dashboard";
 import Subscription from "@/pages/Subscription";
 import MyArticles from "@/pages/MyArticles";
+import Login from "@/pages/Login";
+import Register from "@/pages/Register";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
         {
             path: "/my-articles",
             element: <MyArticles></MyArticles>
+        },
+        {
+            path: "/login",
+            element: <Login></Login>
+        },
+        {
+            path: "/register",
+            element: <Register></Register>
         },
       ]
     },
