@@ -2,9 +2,11 @@ import './navbar.css';
 import { Link, NavLink } from 'react-router-dom';
 import { ModeToggle } from '@/components/toggle';
 import logo from "@/assets/logo.png"
-import user from "@/assets/user.png"
+import user2 from "@/assets/user.png"
+import useAuth from '@/hooks/useAuth';
 
 function Navbar() {
+    const { user, loader, logOut } = useAuth()
 
     return (
         <div className="navbar md:w-11/12 mx-auto justify-between">
@@ -57,17 +59,27 @@ function Navbar() {
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/subscription"}>Subscription</NavLink></li>
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li>
 
+
                 </ul>
             </div>
             {/* login or signup methods */}
-            <Link to="/login" className="px-6 hidden lg:inline-block py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Login</Link>
+            {user ?
+                ""
+                :
+                <Link to="/login" className="px-6 hidden lg:inline-block py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Login</Link>}
             <div className="dropdown hidden lg:inline-block dropdown-hover">
                 <div tabIndex={0} role="button" className="p-1 border rounded-full border-gray-400">
-                    <img className='w-8 h-8' src={user} alt="" />
+                    {user ? <img className='w-8 h-8 rounded-full object-cover' src={user.photoURL} referrerPolicy='no-referrer' alt="" />
+                        :
+                        <img className='w-8 h-8' src={user2} alt="" />}
                 </div>
                 <ul tabIndex={0} className="dropdown-content bg-white/55 absolute top-10 right-0 w-52 menu rounded-box z-[1] p-2 shadow">
-                    <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/my-articles"}>My Articles</NavLink></li>
-                    <ModeToggle></ModeToggle>
+
+                    <div>
+                        <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/my-articles"}>My Articles</NavLink></li>
+                        <button onClick={()=> logOut()} className="px-6 hidden lg:inline-block py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Logout</button>
+                        <ModeToggle></ModeToggle>
+                    </div>
                 </ul>
             </div>
             <div className='lg:hidden'>

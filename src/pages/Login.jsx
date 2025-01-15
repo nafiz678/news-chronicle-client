@@ -1,17 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
+import useAuth from "@/hooks/useAuth";
+import Loader from "@/shared/LoaderSpinner";
+import toast from "react-hot-toast";
 const Login = () => {
+    const { signIn, googleSignIn, loading, user } = useAuth()
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location?.state?.from?.pathname || '/'
+    if (loading) return <Loader />
+    if (user) return <Navigate to={from} replace={true} />
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+        const form = e.target
+        const email = form.email.value
+        const password = form.password.value
+
+        try {
+            //User Login
+            await signIn(email, password)
+            navigate(from, { replace: true })
+            toast.success('Login Successful')
+        } catch (err) {
+            console.log(err)
+            toast.error(err?.message)
+        }
     }
 
 
     const handleGoogle = () => {
         // e.preventDefault()
+        googleSignIn()
         console.log("google login")
     }
-
 
     return (
         <div className="my-20 flex items-center justify-center ">

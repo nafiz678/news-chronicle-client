@@ -8,6 +8,7 @@ import Subscription from "@/pages/Subscription";
 import MyArticles from "@/pages/MyArticles";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
         },
         {
             path: "/add-article",
-            element: <AddArticles></AddArticles>
+            element: <PrivateRoute><AddArticles></AddArticles></PrivateRoute>
         },
         {
             path: "/all-articles",

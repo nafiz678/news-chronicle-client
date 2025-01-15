@@ -45,24 +45,24 @@ const AuthProvider = ({ children }) => {
        const unsubscribe =  onAuthStateChanged(auth, currentUser=>{
             setUser(currentUser)
             setLoading(false)
-            // if(currentUser)
-            // {
-            //     const userInfo = {email: currentUser.email, }
-            //     // get token and store client
-            //     axiosPublic.post("/jwt", userInfo)
-            //     .then(res=>{
-            //         if(res.data.token)
-            //         {
-            //             localStorage.setItem("access-token", res.data.token)
-            //             setLoading(false)
-            //         }
-            //     })
+            if(currentUser)
+            {
+                const userInfo = {email: currentUser.email, }
+                // get token and store client
+                axiosPublic.post("/jwt", userInfo)
+                .then(res=>{
+                    if(res.data.token)
+                    {
+                        localStorage.setItem("access-token", res.data.token)
+                        setLoading(false)
+                    }
+                })
 
-            // }else{
-            //     //todo: clear cookie by calling logout api(if token stored in client side)
-            //     localStorage.removeItem("access-token")
-            //     setLoading(false)
-            // }
+            }else{
+                //todo: clear cookie by calling logout api(if token stored in client side)
+                localStorage.removeItem("access-token")
+                setLoading(false)
+            }
         })
 
         return ()=>{
