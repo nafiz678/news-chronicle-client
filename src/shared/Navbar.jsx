@@ -5,10 +5,11 @@ import logo from "@/assets/logo.png"
 import user2 from "@/assets/user.png"
 import useAuth from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
+import useRole from '@/hooks/useRole';
 
 function Navbar() {
     const { user, loading, logOut } = useAuth()
-
+    const [role] = useRole()
     if (loading) return
     return (
         <div className="fixed inset-x-0 max-w-screen-2xl navbar bg-white/70 text-black lg:px-20 py-4 mx-auto z-50 flex justify-between items-center backdrop-blur-xl ">
@@ -62,7 +63,7 @@ function Navbar() {
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/my-articles"}>My Articles</NavLink></li>
 
                     {/* this will show only for admin */}
-                    {/* <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li> */}
+                    {role === "admin" && <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li> }
 
 
                 </ul>
