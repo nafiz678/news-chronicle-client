@@ -2,7 +2,7 @@ import Sidebar from '@/components/Sidebar'
 import { Outlet } from 'react-router-dom'
 
 const Dashboard = () => {
-    return (<div className='relative min-h-screen md:flex pt-20 bg-white'>
+    return (<div className='relative min-h-screen md:flex pt-6 bg-white'>
         {/* Left Side: Sidebar Component */}
         <Sidebar />
         {/* Right Side: Dashboard Dynamic Content */}

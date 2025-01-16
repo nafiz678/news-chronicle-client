@@ -15,10 +15,12 @@ import AllUsers from "@/pages/Dashboard/AllUsers";
 import AllArticlesForAdmin from "@/pages/Dashboard/AllArticlesForAdmin";
 import AddPublisher from "@/pages/Dashboard/AddPublisher";
 import AdminRoute from "./AdminRoutes";
+import ErrorPage from "@/components/ErrorElement";
 
 const router = createBrowserRouter([
     {
         path: "/",
+        errorElement: <ErrorPage></ErrorPage>,
         element: <MainLayout></MainLayout>,
         children: [
             {
@@ -59,6 +61,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
+        errorElement: <ErrorPage></ErrorPage>,
         element:
             <PrivateRoute>
                 <AdminRoute><Dashboard></Dashboard></AdminRoute>
