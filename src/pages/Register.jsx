@@ -7,7 +7,7 @@ import { FaGoogle } from 'react-icons/fa'
 import Loader from '@/shared/LoaderSpinner'
 
 const SignUp = () => {
-    const { createUser, updateUser, googleSignIn, setUser, loading } = useAuth()
+    const { createUser, updateUser, googleSignIn, setUser, loading, setLoading } = useAuth()
     const navigate = useNavigate()
     // form submit handler
     const handleSubmit = async event => {
@@ -17,10 +17,12 @@ const SignUp = () => {
         const email = form.email.value
         const password = form.password.value
         const image = form.image.files[0]
-
+        
+        setLoading(true)
         const imageURL = await imageUpload(image)
         console.log(imageURL)
         try {
+            setLoading(true)
             //2. User Registration
             const result = await createUser(email, password)
             //3. Save username & profile photo
@@ -33,12 +35,15 @@ const SignUp = () => {
             // save user info in db if the user is new
             await saveUser({ ...result?.user, displayName: name, photoURL: imageURL })
             setUser(result.user)
-
             navigate('/')
             toast.success('Signup Successful')
+            
         } catch (err) {
             console.log(err)
             toast.error(err?.message)
+            
+        }finally{
+            setLoading(false)
         }
     }
 

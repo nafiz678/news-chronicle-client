@@ -3,13 +3,13 @@ import Navbar from "../shared/Navbar";
 import Footer from "@/shared/Footer";
 import useAuth from "@/hooks/useAuth";
 import Loader from "@/shared/LoaderSpinner";
-
+import ScrollProgress from "@/components/ui/scroll-progress";
 
 const MainLayout = () => {
-    const {loading} = useAuth()
+    const { loading } = useAuth()
 
-    
-    if(loading) return <div className="flex items-center justify-center gap-3 h-screen">
+
+    if (loading) return <div className="flex items-center justify-center gap-3 h-screen">
         <Loader></Loader> <h1 className="text-4xl">Loading</h1></div>
     return (
         <div>
@@ -17,7 +17,11 @@ const MainLayout = () => {
                 <Navbar></Navbar>
             </nav>
 
-            <div className="py-16">
+            <div className="">
+                <ScrollProgress className="top-[87px]" />
+            </div>
+
+            <div className="py-16 pt-24">
                 <Outlet></Outlet>
             </div>
 

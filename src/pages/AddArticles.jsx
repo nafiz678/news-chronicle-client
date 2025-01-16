@@ -2,10 +2,12 @@ import { imageUpload } from "@/api/Utils";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
 
 const AddArticles = () => {
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         title: '',
@@ -49,11 +51,11 @@ const AddArticles = () => {
         // Handle form submission logic here
         try {
             const imageURL = await imageUpload(formData.image)
-            const newData = { ...formData, image: imageURL, status: "not approved" }
+            const newData = { ...formData, image: imageURL, status: "not approved", isPremium : false, views: 0 }
             console.log(newData)
             // post article in db
             await axiosSecure.post("/add-article", newData)
-            toast.success("Article added please wait for admin approval")
+            toast.success("Article added please wait for admin approval", {duration: 5000})
             e.target.reset();
             setFormData({
                 title: '',
@@ -62,6 +64,7 @@ const AddArticles = () => {
                 tags: [],
                 description: ''
             });
+            navigate("/my-articles")
         } catch (error) {
             console.log(error)
         }

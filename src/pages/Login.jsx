@@ -5,7 +5,7 @@ import Loader from "@/shared/LoaderSpinner";
 import toast from "react-hot-toast";
 import { saveUser } from "@/api/Utils";
 const Login = () => {
-    const { signin, googleSignIn, loading, user } = useAuth()
+    const { signin, googleSignIn, loading, setLoading, user } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname || '/'
@@ -25,6 +25,7 @@ const Login = () => {
             toast.success('Login Successful')
         } catch (err) {
             console.log(err)
+            setLoading(false)
             toast.error(err?.message)
         }
     }

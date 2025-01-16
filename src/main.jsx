@@ -22,7 +22,7 @@ createRoot(document.getElementById('root')).render(
         <HelmetProvider>
           <ThemeProvider>
             <RouterProvider router={router}></RouterProvider>
-            <Toaster />
+            <Toaster position='top-right'/>
           </ThemeProvider>
         </HelmetProvider>
       </QueryClientProvider>

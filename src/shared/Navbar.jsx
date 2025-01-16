@@ -11,7 +11,7 @@ function Navbar() {
 
     if (loading) return
     return (
-        <div className="navbar md:w-11/12 mx-auto justify-between">
+        <div className="fixed inset-x-0 max-w-screen-2xl navbar bg-white/70 text-black lg:px-20 py-4 mx-auto z-50 flex justify-between items-center backdrop-blur-xl ">
             <div className="justify-start ">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

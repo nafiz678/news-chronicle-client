@@ -9,6 +9,7 @@ import MyArticles from "@/pages/MyArticles";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import PrivateRoute from "./PrivateRoute";
+import ArticleDetails from "@/pages/ArticleDetails";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,15 @@ const router = createBrowserRouter([
         {
             path: "/all-articles",
             element: <AllArticles></AllArticles>
+        },
+        {
+            path: "/all-articles",
+            element: <AllArticles></AllArticles>
+        },
+        {
+            path: "/article/:id", 
+            element: <ArticleDetails></ArticleDetails>,
+            
         },
         {
             path: "/dashboard",
