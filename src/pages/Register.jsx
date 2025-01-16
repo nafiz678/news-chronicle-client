@@ -1,14 +1,17 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import useAuth from '@/hooks/useAuth'
 import { imageUpload, saveUser } from '@/api/Utils'
 import { Helmet } from 'react-helmet-async'
 import { FaGoogle } from 'react-icons/fa'
 import Loader from '@/shared/LoaderSpinner'
+import Lottie from 'lottie-react'
+import register from "@/assets/registration.json"
 
 const SignUp = () => {
-    const { createUser, updateUser, googleSignIn, setUser, loading, setLoading } = useAuth()
+    const { createUser, user, updateUser, googleSignIn, setUser, loading, setLoading } = useAuth()
     const navigate = useNavigate()
+    if (user) return <Navigate to={"/"} replace={true} />
     // form submit handler
     const handleSubmit = async event => {
         event.preventDefault()
@@ -17,7 +20,7 @@ const SignUp = () => {
         const email = form.email.value
         const password = form.password.value
         const image = form.image.files[0]
-        
+
         setLoading(true)
         const imageURL = await imageUpload(image)
         console.log(imageURL)
@@ -37,12 +40,12 @@ const SignUp = () => {
             setUser(result.user)
             navigate('/')
             toast.success('Signup Successful')
-            
+
         } catch (err) {
             console.log(err)
             toast.error(err?.message)
-            
-        }finally{
+
+        } finally {
             setLoading(false)
         }
     }
@@ -72,7 +75,7 @@ const SignUp = () => {
             <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg flex flex-col md:flex-row overflow-hidden">
                 {/* Left Section: Image/Illustration */}
                 <div className="md:w-1/2 p-6 flex items-center justify-center bg-gray-50">
-                    <img src="https://media.istockphoto.com/id/1457433817/photo/group-of-healthy-food-for-flexitarian-diet.jpg?b=1&s=612x612&w=0&k=20&c=V8oaDpP3mx6rUpRfrt2L9mZCD0_ySlnI7cd4nkgGAb8=" alt="Illustration" className="w-full h-auto" />
+                    <Lottie animationData={register} loop={true}></Lottie>
                 </div>
 
                 {/* Right Section: Form */}

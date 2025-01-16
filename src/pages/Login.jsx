@@ -4,6 +4,10 @@ import useAuth from "@/hooks/useAuth";
 import Loader from "@/shared/LoaderSpinner";
 import toast from "react-hot-toast";
 import { saveUser } from "@/api/Utils";
+import Lottie from "lottie-react";
+import loginAnim from "@/assets/login.json"
+
+
 const Login = () => {
     const { signin, googleSignIn, loading, setLoading, user } = useAuth()
     const navigate = useNavigate()
@@ -54,11 +58,7 @@ const Login = () => {
             <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg flex flex-col md:flex-row overflow-hidden">
                 {/* Left Section: Image/Illustration */}
                 <div className="md:w-1/2 p-6 flex items-center justify-center bg-gray-50">
-                    <img
-                        src={""}
-                        alt="Illustration"
-                        className="w-full h-auto"
-                    />
+                    <Lottie animationData={loginAnim} loop={false}></Lottie>
                 </div>
 
                 {/* Right Section: Form */}

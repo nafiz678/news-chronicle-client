@@ -4,6 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
+import formImage from "../assets/add.jpg"
 
 const AddArticles = () => {
     const axiosSecure = useAxiosSecure()
@@ -51,7 +52,7 @@ const AddArticles = () => {
         // Handle form submission logic here
         try {
             const imageURL = await imageUpload(formData.image)
-            const newData = { ...formData, image: imageURL, status: "not approved", isPremium : false, views: 0 }
+            const newData = { ...formData, image: imageURL, status: "not approved", isPremium : false, views: 0, postedDate: new Date() }
             console.log(newData)
             // post article in db
             await axiosSecure.post("/add-article", newData)
@@ -73,18 +74,18 @@ const AddArticles = () => {
 
     return (
         <div className="flex items-center justify-center my-20 ">
-            <div className="w-9/12 flex bg-white shadow-lg rounded-lg">
+            <div className="md:w-11/12 lg:w-9/12 flex flex-col md:flex-row bg-white shadow-lg rounded-lg">
                 {/* Animated Image Section */}
-                <div className="w-3/6 p-6 flex items-center justify-center bg-gray-500 rounded-l-lg">
+                <div className="md:w-3/6 p-6 flex items-center justify-center bg-gray-500 rounded-l-lg">
                     <img
-                        src="https://via.placeholder.com/300"
+                        src={formImage}
                         alt="Animation"
-                        className="w-full h-auto animate-pulse"
+                        className="w-full h-auto"
                     />
                 </div>
 
                 {/* Form Section */}
-                <div className="w-3/6 p-6">
+                <div className="md:w-3/6 p-6">
                     <h2 className="text-2xl font-semibold text-gray-700 mb-4">Submit an Article</h2>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         {/* Title Field */}

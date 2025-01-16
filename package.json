@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
     "@mantine/core": "^7.16.0",
     "@mantine/hooks": "^7.16.0",
     "@radix-ui/react-dropdown-menu": "^2.1.4",
@@ -20,6 +21,7 @@
     "clsx": "^2.1.1",
     "firebase": "^11.1.0",
     "localforage": "^1.10.0",
+    "lottie-react": "^2.4.0",
     "lucide-react": "^0.471.1",
     "match-sorter": "^8.0.0",
     "motion": "^11.18.0",

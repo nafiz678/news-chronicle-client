@@ -93,7 +93,9 @@ function Navbar() {
             <div className='lg:hidden'>
                 <ModeToggle></ModeToggle>
             </div> */}
+            
         </div>
+        
     );
 }
 
