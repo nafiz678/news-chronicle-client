@@ -3,13 +3,9 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useRole from "@/hooks/useRole";
 import Loader from "@/shared/LoaderSpinner";
 import { useQuery } from "@tanstack/react-query";
-import { TiDeleteOutline } from "react-icons/ti";
-import { Link } from "react-router-dom";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure()
-
-    const [role,] = useRole()
 
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ["articles"],
@@ -85,7 +81,7 @@ const AllUsers = () => {
                         </table>
                     </div>
                     :
-                    <div className="md:p-20"> <h2 className="text-6xl">No data available from &rdquo;{user.displayName}&rdquo;</h2></div>
+                    <div className="md:p-20"> <h2 className="text-6xl">No data available</h2></div>
             }
         </div>
     );

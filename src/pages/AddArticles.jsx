@@ -5,8 +5,10 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
 import formImage from "../assets/add.jpg"
+import useAuth from "@/hooks/useAuth";
 
 const AddArticles = () => {
+    const{user} = useAuth()
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
 
@@ -52,7 +54,7 @@ const AddArticles = () => {
         // Handle form submission logic here
         try {
             const imageURL = await imageUpload(formData.image)
-            const newData = { ...formData, image: imageURL, status: "not approved", isPremium : false, views: 0, postedDate: new Date() }
+            const newData = { ...formData, image: imageURL, status: "not approved", isPremium : false, views: 0, postedDate: Date.now(), authorEmail: user.email , authorName: user.displayName, authorPhoto: user.photoURL }
             console.log(newData)
             // post article in db
             await axiosSecure.post("/add-article", newData)

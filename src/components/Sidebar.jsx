@@ -23,15 +23,12 @@ const Sidebar = () => {
       {/* Small Screen Navbar */}
       <div className='bg-gray-100 text-gray-800 flex justify-between md:hidden'>
         <div>
-          <div className='block cursor-pointer p-4 font-bold'>
-            <Link to='/'>
-              <img
-                // className='hidden md:block'
-                src='https://i.ibb.co/4ZXzmq5/logo.png'
-                alt='logo'
-                width='100'
-                height='100'
-              />
+          <div className='p-4'>
+            <Link to={"/"} className="flex items-center justify-center gap-3">
+              <div className='p-2 rounded-full bg-black'>
+                <img className='w-6 h-6 rounded-full' src={logo} alt="logo" />
+              </div>
+              <span className='text-xl text-[#2C2F54]'>News Chronicle</span>
             </Link>
           </div>
         </div>
@@ -46,18 +43,17 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
-          isActive && '-translate-x-full'
-        }  md:translate-x-0  transition duration-200 ease-in-out`}
+        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${isActive && '-translate-x-full'
+          }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           <div>
             <Link to={"/"} className="flex items-center justify-center gap-3">
-                    <div className='p-2 rounded-full bg-black'>
-                        <img className='w-6 h-6 rounded-full' src={logo} alt="logo" />
-                    </div>
-                    <span className='text-xl text-[#2C2F54]'>News Chronicle</span>
-                </Link>
+              <div className='p-2 rounded-full bg-black'>
+                <img className='w-6 h-6 rounded-full' src={logo} alt="logo" />
+              </div>
+              <span className='text-xl text-[#2C2F54]'>News Chronicle</span>
+            </Link>
           </div>
 
           {/* Nav Items */}
@@ -65,7 +61,7 @@ const Sidebar = () => {
             <nav>
               {/*  Menu Items */}
               <AdminMenu></AdminMenu>
-              
+
             </nav>
           </div>
         </div>
