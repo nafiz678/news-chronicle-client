@@ -1,15 +1,18 @@
 import { imageUpload } from "@/api/Utils";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
 import formImage from "../assets/add.jpg"
 import useAuth from "@/hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 
 const AddArticles = () => {
-    const{user} = useAuth()
+    const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
@@ -30,11 +33,21 @@ const AddArticles = () => {
     ];
 
 
-    const publishers = [
-        { id: 1, name: 'Publisher One' },
-        { id: 2, name: 'Publisher Two' },
-        { id: 3, name: 'Publisher Three' },
-    ];
+
+    const { data: publishers= [] } = useQuery({
+        queryKey: ["publishers"],
+        queryFn: async () => {
+            const { data } = await axiosPublic.get("/all-publishers")
+            return data
+        }
+    })
+
+
+    // const publishers = [
+    //     { id: 1, name: 'Publisher One' },
+    //     { id: 2, name: 'Publisher Two' },
+    //     { id: 3, name: 'Publisher Three' },
+    // ];
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -54,11 +67,11 @@ const AddArticles = () => {
         // Handle form submission logic here
         try {
             const imageURL = await imageUpload(formData.image)
-            const newData = { ...formData, image: imageURL, status: "pending", isPremium : false, views: 0, postedDate: Date.now(), authorEmail: user.email , authorName: user.displayName, authorPhoto: user.photoURL }
+            const newData = { ...formData, image: imageURL, status: "pending", isPremium: false, views: 0, postedDate: Date.now(), authorEmail: user.email, authorName: user.displayName, authorPhoto: user.photoURL }
             console.log(newData)
             // post article in db
             await axiosSecure.post("/add-article", newData)
-            toast.success("Article added please wait for admin approval", {duration: 5000})
+            toast.success("Article added please wait for admin approval", { duration: 5000 })
             e.target.reset();
             setFormData({
                 title: '',
@@ -129,8 +142,8 @@ const AddArticles = () => {
                             >
                                 <option value="" disabled>Select a Publisher</option>
                                 {publishers.map((publisher) => (
-                                    <option key={publisher.id} value={publisher.name}>
-                                        {publisher.name}
+                                    <option key={publisher.id} value={publisher.publisherName}>
+                                        {publisher.publisherName}
                                     </option>
                                 ))}
                             </select>

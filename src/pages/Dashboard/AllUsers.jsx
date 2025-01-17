@@ -1,16 +1,19 @@
 import { Button } from "@/components/ui/button";
+import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useRole from "@/hooks/useRole";
 import Loader from "@/shared/LoaderSpinner";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure()
+    const {user} = useAuth()
 
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ["articles"],
         queryFn: async () => {
-            const { data } = await axiosSecure.get("/all-users")
+            const { data } = await axiosSecure.get(`/all-users/${user?.email}`)
             return data
         }
     })
@@ -19,10 +22,32 @@ const AllUsers = () => {
 
     const handleAdmin = async (email) => {
         // make admin api call
-        const {data} = await axiosSecure.patch(`/make-admin/${email}`)
-        console.log(data)
-        refetch()
+        Swal.fire({
+            title: "Make this user Admin?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#2F2F31",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Make Admin!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const { data } = await axiosSecure.patch(`/make-admin/${email}`)
+                if (data.modifiedCount > 0) {
+                    console.log(data)
+                    refetch()
+                    Swal.fire({
+                        title: "Approved",
+                        text: "Article Approved Successfully.",
+                        icon: "success"
+                    });
+                    refetch()
+                }
+
+            }
+        });
     }
+
+
 
 
     return (
@@ -69,10 +94,10 @@ const AllUsers = () => {
                                         </th>
                                         <td className="capitalize">{user.role}</td>
                                         <td className="">
-                                            {user.role === "admin" ? 
-                                            <p  className="px-6 inline py-1 rounded-md bg-black text-white">Admin</p>
+                                            {user.role === "admin" ?
+                                                <p className="px-6 inline py-1 rounded-md bg-black text-white">Admin</p>
                                                 :
-                                                <Button onClick={()=> handleAdmin(user.email) } size="sm"> make admin </Button>
+                                                <Button onClick={() => handleAdmin(user.email)} size="sm"> make admin </Button>
                                             }
                                         </td>
 

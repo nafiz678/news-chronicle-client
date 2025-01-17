@@ -9,6 +9,7 @@ import { Tooltip } from "react-tooltip";
 import { MdDeleteForever } from "react-icons/md";
 import toast from "react-hot-toast";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 
 const AllArticlesForAdmin = () => {
@@ -35,11 +36,27 @@ const AllArticlesForAdmin = () => {
     // };
 
     const handleApprove = async (id) => {
-        
-        await axiosSecure.patch(`/approve-article/${id}`)
-        
-        refetch()
-        toast.success("Article Approved Successfully")
+        Swal.fire({
+            title: "Approve This Article?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#2F2F31",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Approve it!"
+          }).then( async (result) => {
+            if (result.isConfirmed) {
+                const {data} = await axiosSecure.patch(`/approve-article/${id}`)
+                if(data.modifiedCount > 0) {
+                    Swal.fire({
+                        title: "Approved",
+                        text: "Article Approved Successfully.",
+                        icon: "success"
+                      });
+                      refetch()
+                }
+
+            }
+          });
     }
 
     const handleDecline = async (declineId, text) => {

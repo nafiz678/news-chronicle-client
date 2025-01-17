@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import { CiEdit } from "react-icons/ci";
 import { TiDeleteOutline } from "react-icons/ti";
 import { Link } from "react-router-dom";
+import MessageModal from "@/components/MessageModal";
+
 
 
 const MyArticles = () => {
@@ -62,7 +64,12 @@ const MyArticles = () => {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="capitalize">{article.status}</td>
+                                        <td className="capitalize flex items-center justify-start gap-4">
+                                            {article.status}
+
+                                            {article.message && <MessageModal message={article.message} ></MessageModal>}
+
+                                        </td>
                                         <th>
                                             <Link to={`/article/${article._id}`} className="btn btn-ghost btn-xs">Details</Link>
                                         </th>
