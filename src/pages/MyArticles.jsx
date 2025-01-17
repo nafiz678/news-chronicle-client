@@ -15,7 +15,7 @@ const MyArticles = () => {
     const axiosSecure = useAxiosSecure()
 
     const { data: articles = [], isLoading } = useQuery({
-        queryKey: ["article"],
+        queryKey: ["articles"],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/articles/${user?.email}`)
             return data
@@ -60,7 +60,7 @@ const MyArticles = () => {
                                                 </div>
                                                 <div>
                                                     <div className="font-bold">{article.title}</div>
-                                                    {article.isPremium ? <div className="text-sm opacity-80 badge bg-orange-500">Premium</div> : ''}
+                                                    {article.isPremium ? <div className="text-sm opacity-80 badge bg-orange-500">Premium</div> : <p>Is Premium: No</p>}
                                                 </div>
                                             </div>
                                         </td>
@@ -83,7 +83,11 @@ const MyArticles = () => {
                         </table>
                     </div>
                     :
-                    <div className="md:p-20"> <h2 className="text-6xl">No data available from &rdquo;{user.displayName}&rdquo;</h2></div>
+                    <div className="p-4 md:p-10 lg:p-20 text-center">
+                        <h2 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
+                            No data available from &rdquo;{user.displayName}&rdquo;
+                        </h2>
+                    </div>
             }
         </div>
     );

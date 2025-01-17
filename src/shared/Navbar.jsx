@@ -73,7 +73,7 @@ function Navbar() {
                 <>
                     <Button size="lg" onClick={() => logOut()} className="px-6 hidden lg:inline-block  dark:text-background font-medium rounded-md shadow-md  transition duration-300 mr-4">Logout</Button>
                     <Link to={"/my-profile"} className="p-1 bg-gray-600 hover:scale-105 active:scale-95 transition duration-150 ease-in-out rounded-full hidden lg:inline-block ">
-                        <img src={user && user.photoURL ? user.photoURL : user2} className='w-8 h-8 rounded-full object-cover' alt="" />
+                        <img src={user && user.photoURL ? user.photoURL : user2} className='w-8 h-8 rounded-full object-cover' referrerPolicy='no-referrer' alt="" />
                     </Link>
                 </>
                 :

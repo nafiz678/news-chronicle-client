@@ -1,5 +1,4 @@
 import { FaUserCog } from 'react-icons/fa'
-import { BsGraphUp } from 'react-icons/bs'
 import MenuItem from './ui/MenuItem'
 import { MdAddTask } from "react-icons/md";
 import { GrArticle } from "react-icons/gr";

@@ -2,7 +2,8 @@
 const Home = () => {
     return (
         <div>
-            This is home
+            <h1 className="text-9xl font-bold">this section is for slider</h1>
+            <div></div>
         </div>
     );
 };

@@ -1,7 +1,6 @@
 import ArticleDeclineModal from "@/components/ArticleDeclineModal";
 import { Button } from "@/components/ui/button";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import useRole from "@/hooks/useRole";
 import Loader from "@/shared/LoaderSpinner";
 import { useQuery } from "@tanstack/react-query";
 import { IoIosDoneAll } from "react-icons/io";
@@ -10,24 +9,37 @@ import { MdDeleteForever } from "react-icons/md";
 import toast from "react-hot-toast";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 
 const AllArticlesForAdmin = () => {
 
     const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure()
-    const [role,] = useRole()
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    const limit = 6;
 
-    // State to hold the textarea value
 
-
-    const { data: articles = [], isLoading, refetch } = useQuery({
-        queryKey: ["articles"],
+    const { data: articles=[] , isLoading, refetch } = useQuery({
+        queryKey: ["articles", page],
         queryFn: async () => {
-            const { data } = await axiosPublic.get("/all-articles")
-            return data
-        }
+            const { data } = await axiosPublic.get(`/all-articles?page=${page}&limit=${limit}`)
+            setTotalPages(data.totalPages)
+            return data.result
+        },
+        keepPreviousData: true,
     })
+
+    // pagination logics
+
+    const handleNextPage = () => {
+        if (page < totalPages) setPage((prev) => prev + 1);
+    };
+
+    const handlePreviousPage = () => {
+        if (page > 1) setPage((prev) => prev - 1);
+    };
 
 
     const handleApprove = async (id) => {
@@ -193,6 +205,26 @@ const AllArticlesForAdmin = () => {
                                     </tr>)}
                             </tbody>
                         </table>
+                        {/* Pagination Controls */}
+                    <div className="flex justify-between items-center mt-4">
+                        <button
+                            onClick={handlePreviousPage}
+                            disabled={page === 1}
+                            className="px-4 py-2 bg-gray-500 text-white rounded disabled:bg-gray-300"
+                        >
+                            Previous
+                        </button>
+                        <span>
+                            Page {page} of {totalPages}
+                        </span>
+                        <button
+                            onClick={handleNextPage}
+                            disabled={page === totalPages}
+                            className="px-4 py-2 bg-gray-500 text-white rounded disabled:bg-gray-300"
+                        >
+                            Next
+                        </button>
+                    </div>
                     </div>
                     :
                     <h2 className="text-3xl">Data not available</h2>

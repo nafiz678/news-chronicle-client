@@ -10,7 +10,6 @@ import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import PrivateRoute from "./PrivateRoute";
 import ArticleDetails from "@/pages/ArticleDetails";
-import Statistics from "@/pages/Dashboard/Statistics";
 import AllUsers from "@/pages/Dashboard/AllUsers";
 import AllArticlesForAdmin from "@/pages/Dashboard/AllArticlesForAdmin";
 import AddPublisher from "@/pages/Dashboard/AddPublisher";

@@ -1,17 +1,12 @@
 import { useState } from 'react'
-import { GrLogout } from 'react-icons/gr'
 import { AiOutlineBars } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import useRole from '@/hooks/useRole'
-import useAuth from '@/hooks/useAuth'
 import logo from "@/assets/logo.png";
 import AdminMenu from './AdminMenu'
 import { FaHome } from 'react-icons/fa'
 import MenuItem from './ui/MenuItem'
 const Sidebar = () => {
-  const { user, loading, logOut } = useAuth()
   const [isActive, setActive] = useState(false)
-  const [role, isLoading] = useRole()
 
 
   // Sidebar Responsive Handler

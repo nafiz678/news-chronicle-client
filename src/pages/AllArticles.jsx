@@ -1,12 +1,10 @@
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import useRole from "@/hooks/useRole";
 import Loader from "@/shared/LoaderSpinner";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
 const AllArticles = () => {
     const axiosPublic = useAxiosPublic()
-    const [role,] = useRole()
 
     const { data = [], isLoading } = useQuery({
         queryKey: ["articles"],

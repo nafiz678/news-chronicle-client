@@ -1,6 +1,6 @@
 import { imageUpload } from "@/api/Utils";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
@@ -30,6 +30,7 @@ const AddArticles = () => {
         { value: 'Business', label: 'Business' },
         { value: 'Entertainment', label: 'Entertainment' },
         { value: 'Innovation', label: 'Innovation' },
+        { value: 'Environment', label: 'Environment' },
     ];
 
 
