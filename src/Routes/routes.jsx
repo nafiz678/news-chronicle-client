@@ -71,13 +71,6 @@ const router = createBrowserRouter([
                 index: true,
                 element:
                     <PrivateRoute>
-                        <AdminRoute><Statistics></Statistics></AdminRoute>
-                    </PrivateRoute>,
-            },
-            {
-                path: "all-users",
-                element:
-                    <PrivateRoute>
                         <AdminRoute><AllUsers></AllUsers> </AdminRoute>
                     </PrivateRoute>,
             },

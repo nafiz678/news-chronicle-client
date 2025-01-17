@@ -1,17 +1,16 @@
 import { Button } from "@/components/ui/button";
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
-import useRole from "@/hooks/useRole";
 import Loader from "@/shared/LoaderSpinner";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure()
-    const {user} = useAuth()
+    const { user } = useAuth()
 
     const { data: users = [], isLoading, refetch } = useQuery({
-        queryKey: ["articles"],
+        queryKey: ["users"],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/all-users/${user?.email}`)
             return data
@@ -40,13 +39,11 @@ const AllUsers = () => {
                         text: "Article Approved Successfully.",
                         icon: "success"
                     });
-                    refetch()
                 }
 
             }
         });
     }
-
 
 
 
@@ -67,7 +64,6 @@ const AllUsers = () => {
                                     <th>Image</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -92,7 +88,6 @@ const AllUsers = () => {
                                         <th>
                                             {user.email}
                                         </th>
-                                        <td className="capitalize">{user.role}</td>
                                         <td className="">
                                             {user.role === "admin" ?
                                                 <p className="px-6 inline py-1 rounded-md bg-black text-white">Admin</p>
@@ -106,7 +101,7 @@ const AllUsers = () => {
                         </table>
                     </div>
                     :
-                    <div className="md:p-20"> <h2 className="text-6xl">No data available</h2></div>
+                    <div className="md:p-20"> <h2 className="text-6xl">No users found at the moment.</h2></div>
             }
         </div>
     );
