@@ -54,7 +54,7 @@ const AddArticles = () => {
         // Handle form submission logic here
         try {
             const imageURL = await imageUpload(formData.image)
-            const newData = { ...formData, image: imageURL, status: "not approved", isPremium : false, views: 0, postedDate: Date.now(), authorEmail: user.email , authorName: user.displayName, authorPhoto: user.photoURL }
+            const newData = { ...formData, image: imageURL, status: "pending", isPremium : false, views: 0, postedDate: Date.now(), authorEmail: user.email , authorName: user.displayName, authorPhoto: user.photoURL }
             console.log(newData)
             // post article in db
             await axiosSecure.post("/add-article", newData)

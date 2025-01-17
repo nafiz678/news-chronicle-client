@@ -1,49 +1,32 @@
+/* eslint-disable react/prop-types */
 import { Dialog, DialogPanel, DialogTitle, Textarea } from '@headlessui/react'
-import { useState } from 'react'
 import { MdCancel } from "react-icons/md";
 import { Button } from './ui/button';
 import clsx from 'clsx'
-import toast from 'react-hot-toast';
+import { useState } from 'react';
 
 
-export default function ArticleDeclineModal() {
+export default function ArticleDeclineModal({ handleDecline, status, id }) {
+  
   let [isOpen, setIsOpen] = useState(false)
-  // State to hold the textarea value
   const [text, setText] = useState("");
-  const [disable, setDisable] = useState(false);
 
   function open() {
     setIsOpen(true)
+  }
+
+  const handleChange = (e)=>{
+    setText(e.target.value)
   }
 
   function close() {
     setIsOpen(false)
   }
 
-
-    // Handler for textarea input
-    const handleChange = (event) => {
-      setText(event.target.value);
-    };
-  
-    // Handler for confirm button click
-    const handleConfirm = () => {
-      // setText("")
-      // console.log("Textarea value:", text); // Log the textarea value or process it
-      // Perform other actions with `text` (e.g., send to API, update state, etc.)
-      if(text){
-        console.log("Textarea value:", text)
-        close()
-        setDisable(true)
-      }else{
-        toast.error("Message cannot be empty")
-      }
-    };
-
   return (
     <>
       <Button
-        disabled={disable}
+        disabled={status === "declined" || status === "approved"}
         data-tooltip-id="my-tooltip"
         data-tooltip-content="Cancel"
         size="sm"
@@ -82,7 +65,11 @@ export default function ArticleDeclineModal() {
                 </Button>
                 <Button
                   className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700 "
-                  onClick={handleConfirm}
+                  onClick={async () => {
+                    await handleDecline(id, text)
+                    if(!text) return
+                    close()
+                  }}
                 >
                   Confirm
                 </Button>
