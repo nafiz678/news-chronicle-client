@@ -4,7 +4,7 @@ import Home from "@/pages/Home";
 import AddArticles from "@/pages/AddArticles";
 import AllArticles from "@/pages/AllArticles";
 import Dashboard from "@/pages/Dashboard/Dashboard";
-import Subscription from "@/pages/Subscription";
+import Subscription from "@/pages/SubscriptionPage";
 import MyArticles from "@/pages/MyArticles";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";

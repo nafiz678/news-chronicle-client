@@ -15,7 +15,7 @@ function Navbar() {
         <div className="fixed inset-x-0 max-w-screen-2xl navbar bg-white/70 text-black lg:px-20 py-4 mx-auto z-50 flex justify-between items-center backdrop-blur-xl ">
             <div className="justify-start ">
                 <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                    <div tabIndex={0} role="button" className="btn btn-ghost xl:hidden">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-5 w-5"
@@ -38,7 +38,7 @@ function Navbar() {
                             </Link>
                             {user 
                             ? 
-                            <Button size="lg" onClick={() => logOut()} className="px-6 lg:hidden  dark:text-background font-medium rounded-md shadow-md  transition duration-300 mr-4">Logout</Button> 
+                            <Button size="lg" onClick={() => logOut()} className="px-6 xl:hidden  dark:text-background font-medium rounded-md shadow-md  transition duration-300 mr-4">Logout</Button> 
                             : 
                             <Link to="/login" className="px-6 py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Login</Link>}
                         </div>
@@ -47,8 +47,8 @@ function Navbar() {
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/all-articles"}>All Articles</NavLink></li>
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/add-article"}>Add Articles</NavLink></li>
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/subscription"}>Subscription</NavLink></li>
-                        <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li>
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/my-articles"}>My Articles</NavLink></li>
+                        {role === "admin" && <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li> }
                     </ul>
                 </div>
                 <Link to={"/"} className="flex items-center justify-center gap-3">
@@ -58,7 +58,7 @@ function Navbar() {
                     <span className='text-xl text-[#2C2F54]'>News Chronicle</span>
                 </Link>
             </div>
-            <div className="navbar-end flex-1 hidden lg:flex">
+            <div className="navbar-end flex-1 hidden xl:flex">
                 <ul className="menu menu-horizontal px-1 uppercase">
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/"}>Home</NavLink></li>
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/all-articles"}>All Articles</NavLink></li>
@@ -75,7 +75,7 @@ function Navbar() {
             {/* login or signup methods */}
             {user ?
                 <>
-                    <Button size="lg" onClick={() => logOut()} className="px-6 hidden lg:inline-block  dark:text-background font-medium rounded-md shadow-md  transition duration-300 mr-4">Logout</Button>
+                    <Button size="lg" onClick={() => logOut()} className="px-6 hidden xl:inline-block  dark:text-background font-medium rounded-md shadow-md  transition duration-300 mr-4">Logout</Button>
                     <Link to={"/my-profile"} className="p-1 bg-gray-600 hover:scale-105 active:scale-95 transition duration-150 ease-in-out rounded-full hidden lg:inline-block ">
                         <img src={user && user.photoURL ? user.photoURL : user2} className='w-8 h-8 rounded-full object-cover' referrerPolicy='no-referrer' alt="" />
                     </Link>

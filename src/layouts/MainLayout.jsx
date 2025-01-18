@@ -21,7 +21,7 @@ const MainLayout = () => {
                 <ScrollProgress className="top-[87px]" />
             </div>
 
-            <div className="py-16 pt-24">
+            <div className=" pt-24">
                 <Outlet></Outlet>
             </div>
 
