@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import moment from "moment";
 
 
 const AllArticlesForAdmin = () => {
@@ -155,7 +156,7 @@ const AllArticlesForAdmin = () => {
                                     <th>Image</th>
                                     <th>Title</th>
                                     <th>Name</th>
-                                    <th>Email</th>
+                                    <th>Author Email</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -182,9 +183,14 @@ const AllArticlesForAdmin = () => {
                                         <h1>{article.title}</h1>
                                         {article.isPremium && <h2 className="p-2 badge bg-orange-400">Premium</h2>}
                                         </td>
-                                        <td className="capitalize">{article.authorName}</td>
+                                        <td className="capitalize text-nowrap">{article.authorName}
+                                        {article.postedDate && 
+                                        <td data-tooltip-id="my-tooltip" data-tooltip-content={moment(article.postedDate).format('lll')}
+                                         className="p-0">Date: {moment(article.postedDate).format('ll')}</td>}
+                                        </td>
                                         <th>
                                             {article.authorEmail}
+                                            <p className="font-normal">Publisher: {article.publisher}</p>
                                         </th>
                                         <td className="capitalize">{article.status}</td>
                                         <td className="flex items-center justify-start gap-2">
