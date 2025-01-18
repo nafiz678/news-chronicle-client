@@ -16,9 +16,13 @@ export const imageUpload = async (imageData) => {
 
 
 export const saveUser = async (user) => {
-    await axios.post(`http://localhost:5000/users/${user?.email}`, {
-        name: user?.displayName,
-        email: user?.email,
-        image: user.photoURL,
-    })
+    try {
+        await axios.post(`http://localhost:5000/users/${user?.email}`, {
+            name: user?.displayName,
+            email: user?.email,
+            image: user.photoURL,
+        })
+    } catch (error) {
+        console.log(error);
+    }
 }

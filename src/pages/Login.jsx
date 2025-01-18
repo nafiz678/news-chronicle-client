@@ -34,20 +34,18 @@ const Login = () => {
         }
     }
 
-
     const handleGoogle = async () => {
         try {
             //User Registration using google
             const data = await googleSignIn()
             // save user info in db if the user is new
             await saveUser(data?.user)
-      
             navigate(from, { replace: true })
             toast.success('Login Successful')
-          } catch (err) {
+        } catch (err) {
             console.log(err)
             toast.error(err?.message)
-          }finally{
+        } finally {
             setLoading(false)
         }
     }

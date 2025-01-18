@@ -58,6 +58,27 @@ const AuthProvider = ({ children }) => {
                         }
                     })
 
+                    const checkingFunction = async () => {
+                        const { data } = await axiosPublic.get(`/all-users-user/${currentUser?.email}`)
+                        
+                        if (data?.premiumTaken) {
+                            const premiumTakenDate = new Date(data?.premiumTaken); 
+    
+                            if (premiumTakenDate < new Date()) {
+                                console.log("Premium Taken Date:", premiumTakenDate);
+                                console.log("Premium will be null");
+                                const {data} = await axiosPublic.patch(`/update-user-basic/${currentUser.email}`)
+                                console.log(data)
+                            } else {
+                                console.log("Premium Taken Date is in the future.", premiumTakenDate);
+                            }
+                        } else {
+                            console.log("Premium Taken Date is undefined or null.");
+                        }
+                    }
+    
+                    checkingFunction()
+
             } else {
                 setUser(currentUser)
                 //todo: clear cookie by calling logout api(if token stored in client side)

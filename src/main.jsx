@@ -20,9 +20,9 @@ createRoot(document.getElementById('root')).render(
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
         <HelmetProvider>
-          <ThemeProvider>
+          <ThemeProvider defaultTheme='light'>
             <RouterProvider router={router}></RouterProvider>
-            <Toaster position='top-right'/>
+            <Toaster position='top-right' />
           </ThemeProvider>
         </HelmetProvider>
       </QueryClientProvider>

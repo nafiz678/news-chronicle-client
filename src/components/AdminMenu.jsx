@@ -5,6 +5,7 @@ import { GrArticle } from "react-icons/gr";
 import AddPublisherModal from './AddPublisherModal';
 import { useState } from 'react';
 import useAuth from '@/hooks/useAuth';
+import { MdOutlineSpaceDashboard } from "react-icons/md";
 
 
 const AdminMenu = () => {
@@ -19,7 +20,7 @@ const AdminMenu = () => {
 
   return (
     <>
-      <MenuItem icon={FaUserCog} label='Dashboard' address='/dashboard' />
+      <MenuItem icon={MdOutlineSpaceDashboard} label='Dashboard' address='/dashboard' />
       <MenuItem icon={FaUserCog} label='All Users' address='all-users' />
       <MenuItem icon={GrArticle} label='All Articles' address='all-articles' />
       <button

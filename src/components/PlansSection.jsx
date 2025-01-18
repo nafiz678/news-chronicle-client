@@ -18,7 +18,7 @@ const PlansSection = () => {
                         <div className='flex items-center mb-6 justify-between px-2 w-full'>
                             <h3 className="text-2xl text-wrap font-semibold text-gray-700">Beginner Plan</h3>
                             <div className="flex flex-col items-center">
-                                <span className="text-2xl font-bold text-blue-600">FREE <span className='text-sm font-normal'>/mo</span> </span>
+                                <span className="text-2xl font-bold text-blue-600">04.99$ <span className='text-sm font-normal'>/mo</span> </span>
                             </div>
                         </div>
                         <p className="text-gray-600 text-start ml-4 mb-6">Great for casual readers with limited access to articles.</p>
