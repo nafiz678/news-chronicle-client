@@ -1,8 +1,20 @@
+import CheckoutModal from "@/components/CheckoutModal";
+import PlansSection from "@/components/PlansSection";
 import { useState } from "react";
 
 const SubscriptionPage = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("1"); // Default 1 minute
   const [price, setPrice] = useState(5); // Default price for 1 minute
+  let [isOpen, setIsOpen] = useState(false)
+
+
+  function open() {
+    setIsOpen(true)
+  }
+
+  function closeModal() {
+    setIsOpen(false)
+  }
 
   // Handle subscription period change
   const handlePeriodChange = (e) => {
@@ -22,6 +34,7 @@ const SubscriptionPage = () => {
   // Navigate to the payment page when user clicks the "Subscribe" button
   const handleSubscription = () => {
     console.log("Payment page/modal");
+    
   };
 
   return (
@@ -39,9 +52,9 @@ const SubscriptionPage = () => {
         </div>
       </section>
 
-      {/* <section>
+      <section>
         <PlansSection></PlansSection>
-      </section> */}
+      </section>
 
       {/* Subscription Plan Section */}
       <section className="py-12 px-6 text-center">
@@ -54,9 +67,9 @@ const SubscriptionPage = () => {
             onChange={handlePeriodChange}
             className="w-full px-4 py-2 mb-4 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
           >
-            <option value="1">1 Minute (For testing)</option>
-            <option value="5">5 Days</option>
-            <option value="10">10 Days</option>
+            <option value="1">Beginner Plan (For testing)</option>
+            <option value="5">Standard Plan (5 Days)</option>
+            <option value="10">Premium Plan (10 Days)</option>
           </select>
 
           {/* Price Display */}
@@ -66,13 +79,14 @@ const SubscriptionPage = () => {
 
           {/* Subscribe Button */}
           <button
-            onClick={handleSubscription}
+            onClick={open}
             className="w-full py-3 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition duration-300"
           >
-            Checkout
+            CheckOut
           </button>
         </div>
       </section>
+      <CheckoutModal closeModal={closeModal} handleSubscription={handleSubscription} isOpen={isOpen} open={open}></CheckoutModal>
     </div>
   );
 };

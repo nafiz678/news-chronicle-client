@@ -1,15 +1,15 @@
 
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai'; // Importing React Icons
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const PlansSection = () => {
-
+    const {pathname} = useLocation()
 
 
     return (
-        <section className="plans-section  pt-24 pb-10 ">
+        <section className={`plans-section ${pathname === "/" ? "pt-24" : "pt-0" }  pb-10 `}>
             <div className="md:w-11/12 w-full flex flex-col items-center justify-center p-8 rounded-lg mx-auto text-center ">
-                <h2 className="text-4xl font-semibold text-gray-800 mb-8">Explore Our Premium Plans</h2>
+                <h2 className={`text-4xl font-semibold ${pathname === "/" ? "text-gray-800" : "text-gray-300"} mb-8`}>Explore Our Premium Plans</h2>
                 <p className="text-lg text-gray-600 mb-12">Choose the best plan to suit your needs. Get more with exclusive content, features, and support!</p>
                 <div className="plans-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
