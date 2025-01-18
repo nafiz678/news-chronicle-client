@@ -7,12 +7,12 @@ const Home = () => {
         totalUsers: 1200,
         normalUsers: 950,
         premiumUsers: 250,
-      };
+    };
     return (
         <div>
-            <h1 className="text-9xl font-bold">this section is for slider</h1>
+            <h1 className="text-2xl font-bold">this section is for slider</h1>
             <div>
-                <AllPublishers></AllPublishers>
+                <PlansSection></PlansSection>
             </div>
 
             <div>
@@ -20,8 +20,9 @@ const Home = () => {
             </div>
 
             <div>
-                <PlansSection></PlansSection>
+                <AllPublishers></AllPublishers>
             </div>
+
         </div>
     );
 };

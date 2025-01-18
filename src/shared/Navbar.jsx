@@ -33,10 +33,14 @@ function Navbar() {
                         tabIndex={0}
                         className="menu bg-white/90 menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow gap-2">
                         <div className=" flex items-center gap-10">
-                            <div role="button" className="p-2 border inline-block rounded-full border-gray-400">
-                                <img className='w-8 h-8' src={user} alt="" />
-                            </div>
-                            <Link to="/login" className="px-6 py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Login</Link>
+                            <Link to={"/my-profile"} role="button" className=" border inline-block rounded-full border-gray-400">
+                            <img src={user && user.photoURL ? user.photoURL : user2} className='w-10 h-10 rounded-full object-cover' referrerPolicy='no-referrer' alt="" />
+                            </Link>
+                            {user 
+                            ? 
+                            <Button size="lg" onClick={() => logOut()} className="px-6 lg:hidden  dark:text-background font-medium rounded-md shadow-md  transition duration-300 mr-4">Logout</Button> 
+                            : 
+                            <Link to="/login" className="px-6 py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Login</Link>}
                         </div>
 
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/"}>Home</NavLink></li>
@@ -87,13 +91,6 @@ function Navbar() {
                 </>
             }
 
-
-
-            {/* <ModeToggle></ModeToggle>
-            <div className='lg:hidden'>
-                <ModeToggle></ModeToggle>
-            </div> */}
-            
         </div>
         
     );

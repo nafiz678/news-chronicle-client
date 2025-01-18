@@ -143,7 +143,7 @@ const AddArticles = () => {
                             >
                                 <option value="" disabled>Select a Publisher</option>
                                 {publishers.map((publisher) => (
-                                    <option key={publisher.id} value={publisher.publisherName}>
+                                    <option key={publisher._id} value={publisher.publisherName}>
                                         {publisher.publisherName}
                                     </option>
                                 ))}

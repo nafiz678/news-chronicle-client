@@ -2,6 +2,8 @@ import { cn } from "@/lib/utils";
 import Marquee from "./ui/marquee";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
+import AnimatedShinyText from "./ui/animated-shiny-text";
+import { ArrowRightIcon } from "lucide-react";
 
 
 
@@ -47,7 +49,22 @@ export default function AllPublishers() {
 
 
     return (
-        <div className="relative w-10/12 mx-auto my-12 flex h-[200px] flex-col items-center justify-center overflow-hidden bg-background ">
+        <>
+        <h1 className=" tracking-[0.6rem] font-bold text-gray-800 uppercase text-center">
+                <div className="z-10 flex items-center justify-center">
+                    <div
+                        className={cn(
+                            "group rounded-full border mt-10 border-black/5 lg:text-4xl md:text-3xl text-xl text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200  text-nowrap ",
+                        )}
+                    >
+                        <AnimatedShinyText className="inline-flex text-neutral-600 items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-700 hover:duration-300">
+                            <span>ALL PUBLISHERS</span> 
+                        </AnimatedShinyText>
+                    </div>
+                </div>
+            </h1>
+        <div className="relative w-10/12 mx-auto  flex h-[300px] flex-col items-center justify-center overflow-hidden bg-background ">
+            
             <Marquee pauseOnHover className="[--duration:30s]">
                 {publishers.map((publisher) => (
                     <ReviewCard key={publisher._id} {...publisher} />
@@ -56,5 +73,6 @@ export default function AllPublishers() {
             <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#E3E3E3] dark:from-background"></div>
             <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-[#E3E3E3] dark:from-background"></div>
         </div>
+        </>
     );
 }

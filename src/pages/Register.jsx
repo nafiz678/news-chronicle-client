@@ -68,7 +68,11 @@ const SignUp = () => {
         } catch (err) {
             console.log(err)
             toast.error(err?.message)
+        }finally{
+            setLoading(false)
+            
         }
+
     }
 
     if (loading) return <div className='flex items-center justify-center h-screen'><Loader></Loader></div>

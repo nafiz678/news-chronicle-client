@@ -1,16 +1,28 @@
 
 import CountUp from "react-countup";
 import { FaCrown, FaUser, FaUsers } from "react-icons/fa";
+import AnimatedShinyText from "./ui/animated-shiny-text";
+import { cn } from "@/lib/utils";
 
 const Statistic = ({ stats }) => {
   const { totalUsers, normalUsers, premiumUsers } = stats;
 
   return (
-    <div className="my-10 flex flex-col justify-center items-center bg-background p-4">
-      <h1 className="text-4xl tracking-[0.6rem] font-bold text-gray-800 uppercase mb-10 text-center">
-        User Statistics
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
+    <div className="mb-10 flex flex-col justify-center items-center bg-background p-4">
+      <h1 className=" tracking-[0.5rem] py-10 font-bold text-gray-800 uppercase text-center">
+                <div className="z-10 flex items-center justify-center">
+                    <div
+                        className={cn(
+                            "group rounded-full border  border-black/5 lg:text-4xl md:text-3xl text-xl text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200  text-nowrap ",
+                        )}
+                    >
+                        <AnimatedShinyText className="inline-flex text-neutral-600 items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-700 hover:duration-300">
+                            <span>user statistics</span> 
+                        </AnimatedShinyText>
+                    </div>
+                </div>
+            </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
         {/* Total Users Card */}
         <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
           <div className="bg-blue-500 text-white rounded-full h-16 w-16 flex items-center justify-center mb-4">
