@@ -19,7 +19,8 @@ const AdminMenu = () => {
 
   return (
     <>
-      <MenuItem icon={FaUserCog} label='All Users' address='/dashboard' />
+      <MenuItem icon={FaUserCog} label='Dashboard' address='/dashboard' />
+      <MenuItem icon={FaUserCog} label='All Users' address='all-users' />
       <MenuItem icon={GrArticle} label='All Articles' address='all-articles' />
       <button
         onClick={() => setIsOpen(true)}

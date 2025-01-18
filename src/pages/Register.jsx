@@ -21,10 +21,15 @@ const SignUp = () => {
         const password = form.password.value
         const image = form.image.files[0]
 
-        setLoading(true)
+        const passwordRegex = /^(?=.{6,})(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).*$/;
+
+        // setLoading(true)
         const imageURL = await imageUpload(image)
         console.log(imageURL)
         try {
+            if (!passwordRegex.test(password)) {
+                return toast.error("Must be 6+ chars with a number, uppercase, & special character.")
+            }
             setLoading(true)
             //2. User Registration
             const result = await createUser(email, password)
@@ -91,6 +96,7 @@ const SignUp = () => {
                                 type="text"
                                 id="name"
                                 name="name"
+                                required
                                 placeholder="Enter your name"
                                 className="mt-1 block w-full border border-gray-300 bg-white rounded-md p-2.5 focus:ring-2 focus:ring-blue-500"
                             />
@@ -105,6 +111,7 @@ const SignUp = () => {
                                 type="email"
                                 id="email"
                                 name="email"
+                                required
                                 placeholder="Type here"
                                 className="mt-1 block w-full border border-gray-300 bg-white rounded-md p-2.5 focus:ring-2 focus:ring-blue-500"
                             />
@@ -119,6 +126,7 @@ const SignUp = () => {
                                 type="password"
                                 id="password"
                                 name="password"
+                                required
                                 placeholder="Enter your password"
                                 className="mt-1 block w-full border border-gray-300 bg-white rounded-md p-2.5 focus:ring-2 focus:ring-blue-500"
                             />
@@ -133,6 +141,7 @@ const SignUp = () => {
                                 type="file"
                                 id="photoUrl"
                                 name="image"
+                                required
                                 placeholder="Enter photo URL"
                                 className="mt-1 block w-full border border-gray-300 bg-white rounded-md p-2.5 focus:ring-2 focus:ring-blue-500"
                             />

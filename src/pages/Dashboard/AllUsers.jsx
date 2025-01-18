@@ -3,21 +3,34 @@ import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import Loader from "@/shared/LoaderSpinner";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure()
     const { user } = useAuth()
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    const limit = 6;
+
 
     const { data: users = [], isLoading, refetch } = useQuery({
-        queryKey: ["users"],
+        queryKey: ["users", page],
         queryFn: async () => {
-            const { data } = await axiosSecure.get(`/all-users/${user?.email}`)
-            return data
+            const { data } = await axiosSecure.get(`/all-users/${user?.email}?page=${page}&limit=${limit}`)
+            setTotalPages(data.totalPages)
+            return data.result
         }
     })
 
-    console.log(users)
+    const handleNextPage = () => {
+        if (page < totalPages) setPage((prev) => prev + 1);
+    };
+
+    const handlePreviousPage = () => {
+        if (page > 1) setPage((prev) => prev - 1);
+    };
+
 
     const handleAdmin = async (email) => {
         // make admin api call
@@ -47,6 +60,7 @@ const AllUsers = () => {
 
 
 
+
     return (
         <div>
             {isLoading
@@ -64,6 +78,7 @@ const AllUsers = () => {
                                     <th>Image</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -88,6 +103,7 @@ const AllUsers = () => {
                                         <th>
                                             {user.email}
                                         </th>
+                                        <td className="capitalize">{user.role}</td>
                                         <td className="">
                                             {user.role === "admin" ?
                                                 <p className="px-6 inline py-1 rounded-md bg-black text-white">Admin</p>
@@ -99,6 +115,26 @@ const AllUsers = () => {
                                     </tr>)}
                             </tbody>
                         </table>
+                        {/* Pagination Controls */}
+                        <div className="flex justify-between items-center mt-4">
+                            <button
+                                onClick={handlePreviousPage}
+                                disabled={page === 1}
+                                className="px-4 py-2 bg-gray-500 text-white rounded disabled:bg-gray-300"
+                            >
+                                Previous
+                            </button>
+                            <span>
+                                Page {page} of {totalPages}
+                            </span>
+                            <button
+                                onClick={handleNextPage}
+                                disabled={page === totalPages}
+                                className="px-4 py-2 bg-gray-500 text-white rounded disabled:bg-gray-300"
+                            >
+                                Next
+                            </button>
+                        </div>
                     </div>
                     :
                     <div className="md:p-20"> <h2 className="text-6xl">No users found at the moment.</h2></div>
