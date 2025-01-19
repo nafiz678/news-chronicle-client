@@ -4,6 +4,7 @@ import Footer from "@/shared/Footer";
 import useAuth from "@/hooks/useAuth";
 import Loader from "@/shared/LoaderSpinner";
 import ScrollProgress from "@/components/ui/scroll-progress";
+import PopupModal from "@/components/PopUpModal";
 
 const MainLayout = () => {
     const { loading } = useAuth()
@@ -28,6 +29,7 @@ const MainLayout = () => {
             <footer>
                 <Footer></Footer>
             </footer>
+            <PopupModal></PopupModal>
         </div>
     );
 };

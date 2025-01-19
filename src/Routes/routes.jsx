@@ -16,6 +16,9 @@ import AddPublisher from "@/pages/Dashboard/AddPublisher";
 import AdminRoute from "./AdminRoutes";
 import ErrorPage from "@/components/ErrorElement";
 import DashboardPage from "@/pages/Dashboard/DashboardPage";
+import PremiumArticles from "@/pages/PremiumArticles";
+import PremiumRoute from "./PremiumRoute";
+import UpdateArticle from "@/components/UpdateArticle";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +39,10 @@ const router = createBrowserRouter([
                 element: <AllArticles></AllArticles>
             },
             {
+                path: "/premium-articles",
+                element: <PremiumRoute><PremiumArticles></PremiumArticles></PremiumRoute>
+            },
+            {
                 path: "/article/:id",
                 element: <ArticleDetails></ArticleDetails>,
 
@@ -47,6 +54,10 @@ const router = createBrowserRouter([
             {
                 path: "/my-articles",
                 element: <PrivateRoute><MyArticles></MyArticles></PrivateRoute>
+            },
+            {
+                path: "/update-article/:id",
+                element: <PrivateRoute><UpdateArticle></UpdateArticle> </PrivateRoute>
             },
             {
                 path: "/login",

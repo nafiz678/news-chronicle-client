@@ -1,14 +1,15 @@
 import './navbar.css';
-import { Link, NavLink } from 'react-router-dom';
-import { ModeToggle } from '@/components/toggle';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import logo from "@/assets/logo.png"
 import user2 from "@/assets/user.png"
 import useAuth from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import useRole from '@/hooks/useRole';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 function Navbar() {
-    const { user, loading, logOut } = useAuth()
+    const { user, loading, logOut, isSubscribe } = useAuth()
+    const { pathname } = useLocation()
     const [role] = useRole()
     if (loading) return
     return (
@@ -34,13 +35,13 @@ function Navbar() {
                         className="menu bg-white/90 menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow gap-2">
                         <div className=" flex items-center gap-10">
                             <Link to={"/my-profile"} role="button" className=" border inline-block rounded-full border-gray-400">
-                            <img src={user && user.photoURL ? user.photoURL : user2} className='w-10 h-10 rounded-full object-cover' referrerPolicy='no-referrer' alt="" />
+                                <img src={user && user.photoURL ? user.photoURL : user2} className='w-10 h-10 rounded-full object-cover' referrerPolicy='no-referrer' alt="" />
                             </Link>
-                            {user 
-                            ? 
-                            <Button size="lg" onClick={() => logOut()} className="px-6 xl:hidden  dark:text-background font-medium rounded-md shadow-md  transition duration-300 mr-4">Logout</Button> 
-                            : 
-                            <Link to="/login" className="px-6 py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Login</Link>}
+                            {user
+                                ?
+                                <Button size="lg" onClick={() => logOut()} className="px-6 xl:hidden  dark:text-background font-medium rounded-md shadow-md  transition duration-300 mr-4">Logout</Button>
+                                :
+                                <Link to="/login" className="px-6 py-2 bg-gray-800 text-white dark:text-background font-medium rounded-md shadow-md dark:bg-gray-300 transition duration-300 mr-4">Login</Link>}
                         </div>
 
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/"}>Home</NavLink></li>
@@ -48,7 +49,8 @@ function Navbar() {
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/add-article"}>Add Articles</NavLink></li>
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/subscription"}>Subscription</NavLink></li>
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/my-articles"}>My Articles</NavLink></li>
-                        {role === "admin" && <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li> }
+                        {isSubscribe || role === "admin" ? <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/premium-articles"}>Premium Articles</NavLink></li> : <></> }
+                        {role === "admin" && <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li>}
                     </ul>
                 </div>
                 <Link to={"/"} className="flex items-center justify-center gap-3">
@@ -61,13 +63,30 @@ function Navbar() {
             <div className="navbar-end flex-1 hidden xl:flex">
                 <ul className="menu menu-horizontal px-1 uppercase">
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/"}>Home</NavLink></li>
-                    <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/all-articles"}>All Articles</NavLink></li>
+
+                    {isSubscribe || role === "admin" ?
+                        <DropdownMenu >
+                            <DropdownMenuTrigger >
+                                <li><Link className={`mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 uppercase dark:bg-[#DCDCDC] dark:text-background ${pathname === "/all-articles" || pathname === "/premium-articles" ? "active" : ""}`} >All Articles</Link></li>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="z-[9999]">
+                                <DropdownMenuItem className="hover:bg-none">
+                                    <NavLink className={"mr-3 uppercase bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background px-4 py-2 w-full"} to={"/all-articles"}>All Articles</NavLink>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    <NavLink className={"mr-3 uppercase bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background px-4 py-2 w-full"} to={"/premium-articles"}>Premium Articles</NavLink>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                        :
+                        <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/all-articles"}>All Articles</NavLink></li>}
+
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/add-article"}>Add Articles</NavLink></li>
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/subscription"}>Subscription</NavLink></li>
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/my-articles"}>My Articles</NavLink></li>
 
                     {/* this will show only for admin */}
-                    {role === "admin" && <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li> }
+                    {role === "admin" && <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li>}
 
 
                 </ul>
@@ -92,7 +111,7 @@ function Navbar() {
             }
 
         </div>
-        
+
     );
 }
 

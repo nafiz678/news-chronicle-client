@@ -7,6 +7,7 @@ import { CiEdit } from "react-icons/ci";
 import { TiDeleteOutline } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import MessageModal from "@/components/MessageModal";
+import Swal from "sweetalert2";
 
 
 
@@ -14,15 +15,42 @@ const MyArticles = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
 
-    const { data: articles = [], isLoading } = useQuery({
-        queryKey: ["articles"],
+
+
+
+    const { data: articles = [], isLoading, refetch } = useQuery({
+        queryKey: ["articles", user?.email],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/articles/${user?.email}`)
             return data
         }
     })
 
-    console.log(articles)
+    const handleDelete = async (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#2F2F31",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const { data } = await axiosSecure.delete(`delete-article/${id}`)
+                if (data.deletedCount > 0) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Article Deleted Successfully.",
+                        icon: "success"
+                    });
+                    refetch()
+                }
+
+            }
+        });
+    }
+
 
     return (
         <div>
@@ -60,7 +88,7 @@ const MyArticles = () => {
                                                 </div>
                                                 <div>
                                                     <div className="font-bold">{article.title}</div>
-                                                    {article.isPremium ? <div className="text-sm opacity-80 badge bg-orange-500">Premium</div> : <p>Is Premium: No</p>}
+                                                    {article.isPremium ? <div className="text-sm opacity-80 badge bg-orange-500">Premium: Yes</div> : <p>Premium: No</p>}
                                                 </div>
                                             </div>
                                         </td>
@@ -74,8 +102,18 @@ const MyArticles = () => {
                                             <Link to={`/article/${article._id}`} className="btn btn-ghost btn-xs">Details</Link>
                                         </th>
                                         <td className="flex items-center justify-start gap-10">
-                                            <Link><Button size="sm"> <CiEdit></CiEdit> </Button></Link>
-                                            <Button size="sm"> <TiDeleteOutline></TiDeleteOutline> </Button>
+
+                                            <Link to={`/update-article/${article?._id}`}>
+                                                <Button
+                                                    size="sm"
+                                                    className="rounded-md  text-sm font-medium text-white focus:outline-none"
+                                                >
+                                                    <CiEdit></CiEdit>
+                                                </Button>
+                                            </Link>
+
+
+                                            <Button onClick={() => handleDelete(article._id)} size="sm"> <TiDeleteOutline></TiDeleteOutline> </Button>
                                         </td>
 
                                     </tr>)}

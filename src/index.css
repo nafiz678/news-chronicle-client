@@ -9,6 +9,19 @@
   font-weight: 400;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scroll bar for Firefox */
+html {
+  scrollbar-width: none;
+}
+
+body {
+  overflow: auto;
+}
+
 
 @layer base {
   :root {

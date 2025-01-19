@@ -1,27 +1,52 @@
-import { imageUpload } from "@/api/Utils";
-import useAxiosSecure from "@/hooks/useAxiosSecure";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import Select from 'react-select';
-import formImage from "../assets/add.jpg"
 import useAuth from "@/hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Select from 'react-select';
+import updateImg from "../assets/update.jpg";
+import { imageUpload } from "@/api/Utils";
+import toast from "react-hot-toast";
 
-const AddArticles = () => {
+const UpdateArticle = () => {
+
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
+    const {id} = useParams()
+
+    const { data: article = {} } = useQuery({
+        queryKey: ['article', id], 
+        queryFn: async () => {
+          const { data } = await axiosPublic.get(`/article/${id}`);
+          return data;
+        },
+      });
 
     const [formData, setFormData] = useState({
-        title: '',
+        title: "",
         image: null,
-        publisher: '',
+        publisher: "",
         tags: [],
-        description: ''
-    });
+        description: "",
+      });
+
+      // Update formData when article data is fetched
+  useEffect(() => {
+    if (article && Object.keys(article).length > 0) {
+      setFormData({
+        title: article.title || "",
+        image: article.image || "",
+        publisher: article.publisher || "",
+        tags: article?.tags || [],
+        description: article.description || "",
+      });
+    }
+  }, [article]);
+
+
 
     const tagOptions = [
         { value: 'Technology', label: 'Technology' },
@@ -35,7 +60,7 @@ const AddArticles = () => {
 
 
 
-    const { data: publishers= [] } = useQuery({
+    const { data: publishers = [] } = useQuery({
         queryKey: ["publishers"],
         queryFn: async () => {
             const { data } = await axiosPublic.get("/all-publishers")
@@ -43,12 +68,6 @@ const AddArticles = () => {
         }
     })
 
-
-    // const publishers = [
-    //     { id: 1, name: 'Publisher One' },
-    //     { id: 2, name: 'Publisher Two' },
-    //     { id: 3, name: 'Publisher Three' },
-    // ];
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -63,48 +82,31 @@ const AddArticles = () => {
         setFormData({ ...formData, tags: selectedOptions });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleUpdate = async (e) => {
+        
+
         // Handle form submission logic here
         try {
+            e.preventDefault();
             const imageURL = await imageUpload(formData.image)
-            const newData = { ...formData, image: imageURL, status: "pending", isPremium: false, views: 0, postedDate: Date.now(), authorEmail: user.email, authorName: user.displayName, authorPhoto: user.photoURL }
-            console.log(newData)
+            const updatedData = { ...formData, tags: formData.tags, image: imageURL }
+            console.log(updatedData)
             // post article in db
-            await axiosSecure.post("/add-article", {article: newData, email: user?.email})
-            toast.success("Article added please wait for admin approval", { duration: 5000 })
-            e.target.reset();
-            setFormData({
-                title: '',
-                image: null,
-                publisher: '',
-                tags: [],
-                description: ''
-            });
+            await axiosSecure.patch(`/update-article/${id}`, updatedData)
+            toast.success("Article Updated successfully")
             navigate("/my-articles")
         } catch (error) {
             console.log(error)
-            toast.error(error.response.data.message)
         }
     };
 
 
     return (
-        <div className="flex items-center justify-center my-20 ">
-            <div className="md:w-11/12 lg:w-9/12 flex flex-col md:flex-row bg-white shadow-lg rounded-lg">
-                {/* Animated Image Section */}
-                <div className="md:w-3/6 p-6 flex items-center justify-center bg-gray-500 rounded-l-lg">
-                    <img
-                        src={formImage}
-                        alt="Animation"
-                        className="w-full h-auto"
-                    />
-                </div>
-
-                {/* Form Section */}
+        <div className="flex items-center justify-center my-20">
+            <div className="md:w-11/12 lg:w-9/12 flex flex-col-reverse md:flex-row bg-white shadow-lg rounded-lg">
                 <div className="md:w-3/6 p-6">
-                    <h2 className="text-2xl font-semibold text-gray-700 mb-4">Submit an Article</h2>
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <h1 className="text-2xl font-semibold text-gray-700 mb-4"> Update an article</h1>
+                    <form onSubmit={handleUpdate} className="space-y-4">
                         {/* Title Field */}
                         <div>
                             <label htmlFor="title" className="block text-gray-600 mb-2">Title</label>
@@ -188,9 +190,17 @@ const AddArticles = () => {
                         </button>
                     </form>
                 </div>
+                {/* Animated Image Section */}
+                <div className="md:w-3/6 p-6 flex items-center justify-center  rounded-r-lg">
+                    <img
+                        src={updateImg}
+                        alt="Animation"
+                        className="w-full h-auto"
+                    />
+                </div>
             </div>
         </div>
     );
 };
 
-export default AddArticles;
+export default UpdateArticle;

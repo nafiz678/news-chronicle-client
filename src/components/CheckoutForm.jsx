@@ -5,11 +5,13 @@ import { useEffect, useState } from 'react';
 import useAxiosSecure from '@/hooks/useAxiosSecure';
 import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutForm = ({ price }) => {
-    const { user } = useAuth()
+    const { user, isSubscribe, setIsSubscribe } = useAuth()
     const [clientSecret, setClientSecret] = useState("")
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
 
     useEffect(() => {
         paymentIntent()
@@ -57,40 +59,44 @@ const CheckoutForm = ({ price }) => {
         }
 
         // confirm payment
-        const {paymentIntent} = await stripe.confirmCardPayment(clientSecret , {
-                payment_method: {
-                    card: card,
-                    billing_details: {
-                        name: user?.displayNme,
-                        email: user?.email,
-                    },
+        const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: user?.displayNme,
+                    email: user?.email,
                 },
-            })
-            if(paymentIntent.status === "succeeded"){
-                // update user role normal user to premium user
-                try {
-                    // Ensure price is defined
-                    if (!price) {
-                      console.error("Price is not defined.");
-                      return;
-                    }
+            },
+        })
+        if (paymentIntent.status === "succeeded") {
+            // update user role normal user to premium user
+            try {
+                // Ensure price is defined
+                if (!price) {
+                    console.error("Price is not defined.");
+                    return;
+                }
 
-                    // Ensure user email is valid
-                    if (!user?.email) {
-                      console.error("User email is not available.");
-                      return;
-                    }
-                
-                    console.log("Payment amount:", paymentIntent.amount);
-                
-                    // API call to update user role
-                    const { data } = await axiosSecure.post("/update-user", { email: user?.email, price: paymentIntent.amount });
-                    console.log("Update user response:", data);
-                    toast.success(`Congrats, You have taken the ${paymentIntent.amount === 500 ? "Standard" : "Premium"} Subscription`)
-                  } catch (error) {
-                    console.error("Error updating user role:", error);
-                  }
+                // Ensure user email is valid
+                if (!user?.email) {
+                    console.error("User email is not available.");
+                    return;
+                }
+
+                console.log("Payment amount:", paymentIntent.amount);
+
+                // API call to update user role
+                const { data } = await axiosSecure.post("/update-user", { email: user?.email, price: paymentIntent.amount });
+                console.log("Update user response:", data);
+                setIsSubscribe(true)
+                navigate("/")
+                const { data:role } = await axiosSecure.get(`/users/role/${user?.email}`)
+                console.log(role)
+                toast.success(`Congrats, You have taken the ${paymentIntent.amount === 500 ? "Standard" : "Premium"} Subscription`)
+            } catch (error) {
+                console.error("Error updating user role:", error);
             }
+        }
     };
 
     return (
