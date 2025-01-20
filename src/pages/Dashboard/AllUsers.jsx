@@ -4,6 +4,7 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import Loader from "@/shared/LoaderSpinner";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
@@ -63,6 +64,9 @@ const AllUsers = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>All Users || News Chronicle</title>
+            </Helmet>
             {isLoading
                 ?
                 <div className="flex items-center justify-center gap-3 h-screen">

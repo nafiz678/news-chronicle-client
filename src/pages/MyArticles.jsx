@@ -8,6 +8,7 @@ import { TiDeleteOutline } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import MessageModal from "@/components/MessageModal";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -54,6 +55,9 @@ const MyArticles = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>My Articles || News Chronicle</title>
+            </Helmet>
             {isLoading
                 ?
                 <div className="flex items-center justify-center gap-3 h-screen">

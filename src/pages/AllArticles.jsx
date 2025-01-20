@@ -3,6 +3,7 @@ import ArticleCard from "@/shared/ArticleCard";
 import Loader from "@/shared/LoaderSpinner";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const AllArticles = () => {
     const axiosPublic = useAxiosPublic()
@@ -51,7 +52,9 @@ const AllArticles = () => {
 
     return (
         <div>
-
+            <Helmet>
+                <title>All Articles || News Chronicle</title>
+            </Helmet>
             <div className="w-11/12 mx-auto pt-10">
                 <div className="flex items-center justify-between px-2">
                     <div>

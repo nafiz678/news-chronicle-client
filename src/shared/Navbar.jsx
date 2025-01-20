@@ -32,7 +32,7 @@ function Navbar() {
                     </div>
                     <ul
                         tabIndex={0}
-                        className="menu bg-white/90 menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow gap-2">
+                        className="menu bg-white/90 menu-sm z[1] dropdown-content rounded-box mt-3 w-52 p-2 shadow gap-2 pt-5">
                         <div className=" flex items-center gap-10">
                             <Link to={"/my-profile"} role="button" className=" border inline-block rounded-full border-gray-400">
                                 <img src={user && user.photoURL ? user.photoURL : user2} className='w-10 h-10 rounded-full object-cover' referrerPolicy='no-referrer' alt="" />
@@ -64,7 +64,7 @@ function Navbar() {
                 <ul className="menu menu-horizontal px-1 uppercase">
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/"}>Home</NavLink></li>
 
-                    {isSubscribe || role === "admin" ?
+                    {isSubscribe || role === "admin" || role === "premium" ?
                         <DropdownMenu >
                             <DropdownMenuTrigger >
                                 <li><Link className={`mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 uppercase dark:bg-[#DCDCDC] dark:text-background ${pathname === "/all-articles" || pathname === "/premium-articles" ? "active" : ""}`} >All Articles</Link></li>

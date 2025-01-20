@@ -35,3 +35,7 @@
   border: 2px solid rgb(43, 43, 43);
   border-radius: 100px;
 }
+
+.zIndex{
+  z-index: 9999;
+}

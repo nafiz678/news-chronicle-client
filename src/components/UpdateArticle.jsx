@@ -8,6 +8,7 @@ import Select from 'react-select';
 import updateImg from "../assets/update.jpg";
 import { imageUpload } from "@/api/Utils";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const UpdateArticle = () => {
 
@@ -103,6 +104,9 @@ const UpdateArticle = () => {
 
     return (
         <div className="flex items-center justify-center my-20">
+            <Helmet>
+                <title>Update Article || News Chronicle</title>
+            </Helmet>
             <div className="md:w-11/12 lg:w-9/12 flex flex-col-reverse md:flex-row bg-white shadow-lg rounded-lg">
                 <div className="md:w-3/6 p-6">
                     <h1 className="text-2xl font-semibold text-gray-700 mb-4"> Update an article</h1>

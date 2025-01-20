@@ -22,7 +22,7 @@ const MainLayout = () => {
                 <ScrollProgress className="top-[87px]" />
             </div>
 
-            <div className=" pt-[87px]">
+            <div className=" pt-[87px] min-h-[calc(100vh-336px)]">
                 <Outlet></Outlet>
             </div>
 

@@ -19,6 +19,7 @@ import DashboardPage from "@/pages/Dashboard/DashboardPage";
 import PremiumArticles from "@/pages/PremiumArticles";
 import PremiumRoute from "./PremiumRoute";
 import UpdateArticle from "@/components/UpdateArticle";
+import UserProfile from "@/shared/UserProfile";
 
 const router = createBrowserRouter([
     {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
             {
                 path: "/update-article/:id",
                 element: <PrivateRoute><UpdateArticle></UpdateArticle> </PrivateRoute>
+            },
+            {
+                path: "/my-profile",
+                element: <PrivateRoute><UserProfile></UserProfile> </PrivateRoute>
             },
             {
                 path: "/login",

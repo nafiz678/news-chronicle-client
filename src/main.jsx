@@ -12,6 +12,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import ArrowCursor from './shared/Cursor/arrowCursor'
 
 const queryClient = new QueryClient()
 
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')).render(
         <HelmetProvider>
           <ThemeProvider defaultTheme='light'>
             <RouterProvider router={router}></RouterProvider>
+            <ArrowCursor></ArrowCursor>
             <Toaster position='top-right' />
           </ThemeProvider>
         </HelmetProvider>

@@ -6,11 +6,13 @@ import toast from "react-hot-toast";
 import { saveUser } from "@/api/Utils";
 import Lottie from "lottie-react";
 import loginAnim from "@/assets/login.json"
+import useRole from "@/hooks/useRole";
 
 
 const Login = () => {
-    const { signin, googleSignIn, loading, setLoading, user } = useAuth()
+    const { signin, googleSignIn, loading, setLoading, user, setIsSubscribe } = useAuth()
     const navigate = useNavigate()
+    const [role] = useRole()
     const location = useLocation()
     const from = location?.state?.from?.pathname || '/'
     if (loading) return <Loader />
@@ -38,10 +40,13 @@ const Login = () => {
         try {
             //User Registration using google
             const data = await googleSignIn()
+            if (role === "premium" || user?.role === "admin") return setIsSubscribe(true)
+            if (role === "user" || !role) return setIsSubscribe(false)
             // save user info in db if the user is new
             await saveUser(data?.user)
             navigate(from, { replace: true })
             toast.success('Login Successful')
+
         } catch (err) {
             console.log(err)
             toast.error(err?.message)

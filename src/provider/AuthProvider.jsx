@@ -51,6 +51,8 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             if (currentUser?.email) {
                 setUser(currentUser)
+                setIsSubscribe(true)
+                console.log(isSubscribe)
                 const userInfo = { email: currentUser.email, }
                 // get token and store client
                 axiosPublic.post("/jwt", userInfo)
@@ -88,6 +90,7 @@ const AuthProvider = ({ children }) => {
                 //todo: clear cookie by calling logout api(if token stored in client side)
                 localStorage.removeItem("access-token")
                 setLoading(false)
+                setIsSubscribe(false)
             }
         })
 

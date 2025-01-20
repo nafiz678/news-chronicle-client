@@ -1,8 +1,12 @@
 import Sidebar from '@/components/Sidebar'
+import { Helmet } from 'react-helmet-async'
 import { Outlet } from 'react-router-dom'
 
 const Dashboard = () => {
     return (<div className='relative min-h-screen md:flex pt-6 bg-white'>
+        <Helmet>
+            <title>Dashboard || News Chronicle</title>
+        </Helmet>
         {/* Left Side: Sidebar Component */}
         <Sidebar />
         {/* Right Side: Dashboard Dynamic Content */}

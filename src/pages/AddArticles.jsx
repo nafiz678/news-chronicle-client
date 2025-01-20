@@ -8,6 +8,7 @@ import formImage from "../assets/add.jpg"
 import useAuth from "@/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 const AddArticles = () => {
     const { user } = useAuth()
@@ -91,6 +92,9 @@ const AddArticles = () => {
 
     return (
         <div className="flex items-center justify-center my-20 ">
+            <Helmet>
+                <title>Add Article || News Chronicle</title>
+            </Helmet>
             <div className="md:w-11/12 lg:w-9/12 flex flex-col md:flex-row bg-white shadow-lg rounded-lg">
                 {/* Animated Image Section */}
                 <div className="md:w-3/6 p-6 flex items-center justify-center bg-gray-500 rounded-l-lg">

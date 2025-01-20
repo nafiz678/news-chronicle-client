@@ -11,6 +11,7 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import moment from "moment";
+import { Helmet } from "react-helmet-async";
 
 
 const AllArticlesForAdmin = () => {
@@ -22,7 +23,7 @@ const AllArticlesForAdmin = () => {
     const limit = 6;
 
 
-    const { data: articles=[] , isLoading, refetch } = useQuery({
+    const { data: articles = [], isLoading, refetch } = useQuery({
         queryKey: ["articles", page],
         queryFn: async () => {
             const { data } = await axiosPublic.get(`/all-articles?page=${page}&limit=${limit}`)
@@ -143,6 +144,9 @@ const AllArticlesForAdmin = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>All Articles || News Chronicle</title>
+            </Helmet>
             {isLoading ? <div className="flex items-center justify-center gap-3 h-screen">
                 <Loader></Loader> <h1 className="text-4xl">Loading</h1></div>
                 :
@@ -180,13 +184,13 @@ const AllArticlesForAdmin = () => {
                                             </div>
                                         </td>
                                         <td className=" font-semibold">
-                                        <h1>{article.title}</h1>
-                                        {article.isPremium && <h2 className="p-2 badge bg-orange-400">Premium</h2>}
+                                            <h1>{article.title}</h1>
+                                            {article.isPremium && <h2 className="p-2 badge bg-orange-400">Premium</h2>}
                                         </td>
                                         <td className="capitalize text-nowrap">{article.authorName}
-                                        {article.postedDate && 
-                                        <p data-tooltip-id="my-tooltip" data-tooltip-content={moment(article.postedDate).format('lll')}
-                                         className="p-0">Date: {moment(article.postedDate).format('ll')}</p>}
+                                            {article.postedDate &&
+                                                <p data-tooltip-id="my-tooltip" data-tooltip-content={moment(article.postedDate).format('lll')}
+                                                    className="p-0">Date: {moment(article.postedDate).format('ll')}</p>}
                                         </td>
                                         <th>
                                             {article.authorEmail}
@@ -204,33 +208,33 @@ const AllArticlesForAdmin = () => {
                                                 data-tooltip-id="my-tooltip" data-tooltip-content="Delete!" size="sm"> <MdDeleteForever></MdDeleteForever> </Button>
 
                                             <Button disabled={article.status === "declined" || article.isPremium}
-                                            onClick={() => handleMakePremium(article._id)}
-                                             data-tooltip-id="my-tooltip" data-tooltip-content="Make Premium">Premium</Button>
+                                                onClick={() => handleMakePremium(article._id)}
+                                                data-tooltip-id="my-tooltip" data-tooltip-content="Make Premium">Premium</Button>
                                         </td>
 
                                     </tr>)}
                             </tbody>
                         </table>
                         {/* Pagination Controls */}
-                    <div className="flex justify-between items-center mt-4">
-                        <button
-                            onClick={handlePreviousPage}
-                            disabled={page === 1}
-                            className="px-4 py-2 bg-gray-500 text-white rounded disabled:bg-gray-300"
-                        >
-                            Previous
-                        </button>
-                        <span>
-                            Page {page} of {totalPages}
-                        </span>
-                        <button
-                            onClick={handleNextPage}
-                            disabled={page === totalPages}
-                            className="px-4 py-2 bg-gray-500 text-white rounded disabled:bg-gray-300"
-                        >
-                            Next
-                        </button>
-                    </div>
+                        <div className="flex justify-between items-center mt-4">
+                            <button
+                                onClick={handlePreviousPage}
+                                disabled={page === 1}
+                                className="px-4 py-2 bg-gray-500 text-white rounded disabled:bg-gray-300"
+                            >
+                                Previous
+                            </button>
+                            <span>
+                                Page {page} of {totalPages}
+                            </span>
+                            <button
+                                onClick={handleNextPage}
+                                disabled={page === totalPages}
+                                className="px-4 py-2 bg-gray-500 text-white rounded disabled:bg-gray-300"
+                            >
+                                Next
+                            </button>
+                        </div>
                     </div>
                     :
                     <h2 className="text-3xl">Data not available</h2>

@@ -3,6 +3,7 @@ import PlansSection from "@/components/PlansSection";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 
 // check the file later
@@ -36,6 +37,9 @@ const SubscriptionPage = () => {
 
   return (
     <div className="pb-20 bg-gradient-to-b from-gray-800 via-gray-800 to-gray-900 text-white">
+      <Helmet>
+        <title>Subscription || News Chronicle</title>
+      </Helmet>
       {/* Banner Section */}
       <section className="relative pt-24 pb-16 px-4 text-center">
         <div className="absolute inset-0 "></div>
@@ -84,7 +88,7 @@ const SubscriptionPage = () => {
           </Elements>
 
           {/* Subscribe Button */}
-          
+
         </div>
       </section>
     </div>

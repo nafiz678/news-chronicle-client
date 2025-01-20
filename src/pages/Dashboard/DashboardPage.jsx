@@ -3,15 +3,13 @@ import PieChart from "@/components/PieChart";
 const DashboardPage = () => {
     return (
         <div>
-            dashboard page
-
-
             <div>
+                <PieChart></PieChart>
                 <div>
                     
                 </div>
-                <PieChart></PieChart>
             </div>
+
         </div>
     );
 };
