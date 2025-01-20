@@ -6,6 +6,8 @@ import useAuth from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import useRole from '@/hooks/useRole';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { FaAngleDown } from "react-icons/fa6";
+
 
 function Navbar() {
     const { user, loading, logOut, isSubscribe } = useAuth()
@@ -64,10 +66,10 @@ function Navbar() {
                 <ul className="menu menu-horizontal px-1 uppercase">
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/"}>Home</NavLink></li>
 
-                    {isSubscribe || role === "admin" || role === "premium" ?
+                    { role === "admin" || role === "premium" || role === "standard" ?
                         <DropdownMenu >
                             <DropdownMenuTrigger >
-                                <li><Link className={`mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 uppercase dark:bg-[#DCDCDC] dark:text-background ${pathname === "/all-articles" || pathname === "/premium-articles" ? "active" : ""}`} >All Articles</Link></li>
+                                <li><Link className={`mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 uppercase dark:bg-[#DCDCDC] dark:text-background ${pathname === "/all-articles" || pathname === "/premium-articles" ? "active" : ""}`} >All Articles <FaAngleDown></FaAngleDown></Link></li>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="z-[9999]">
                                 <DropdownMenuItem className="hover:bg-none">
