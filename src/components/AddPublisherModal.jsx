@@ -34,7 +34,7 @@ const AddPublisherModal = ({ closeModal, isOpen }) => {
         const publisherData = {publisherImage: imageUrl, publisherName: name}
         
         const {data} = await axiosSecure.post("/add-publisher", publisherData)
-        console.log(data)
+        
         if(data.insertedId){
             toast.success("Publisher Added Successfully")
             closeModal()

@@ -48,10 +48,10 @@ function Navbar() {
 
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/"}>Home</NavLink></li>
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/all-articles"}>All Articles</NavLink></li>
-                        <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/add-article"}>Add Articles</NavLink></li>
+                        {user && <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/add-article"}>Add Articles</NavLink></li>}
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/subscription"}>Subscription</NavLink></li>
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/my-articles"}>My Articles</NavLink></li>
-                        {isSubscribe || role === "admin" ? <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/premium-articles"}>Premium Articles</NavLink></li> : <></> }
+                        {isSubscribe || role === "admin" ? <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/premium-articles"}>Premium Articles</NavLink></li> : <></>}
                         {role === "admin" && <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li>}
                     </ul>
                 </div>
@@ -66,7 +66,7 @@ function Navbar() {
                 <ul className="menu menu-horizontal px-1 uppercase">
                     <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/"}>Home</NavLink></li>
 
-                    { role === "admin" || role === "premium" || role === "standard" ?
+                    {role === "admin" || role === "premium" || role === "standard" ?
                         <DropdownMenu >
                             <DropdownMenuTrigger >
                                 <li><Link className={`mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 uppercase dark:bg-[#DCDCDC] dark:text-background ${pathname === "/all-articles" || pathname === "/premium-articles" ? "active" : ""}`} >All Articles <FaAngleDown></FaAngleDown></Link></li>
@@ -83,9 +83,11 @@ function Navbar() {
                         :
                         <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/all-articles"}>All Articles</NavLink></li>}
 
-                    <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/add-article"}>Add Articles</NavLink></li>
-                    <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/subscription"}>Subscription</NavLink></li>
-                    <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/my-articles"}>My Articles</NavLink></li>
+                    {user && <>
+                        <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/add-article"}>Add Articles</NavLink></li>
+                        <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/subscription"}>Subscription</NavLink></li>
+                        <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/my-articles"}>My Articles</NavLink></li>
+                    </>}
 
                     {/* this will show only for admin */}
                     {role === "admin" && <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li>}
