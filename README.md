@@ -15,17 +15,17 @@ Welcome to **News Chronicle**, your go-to source for the latest news and updates
 
 ## Features
 
-1. **User-Friendly Interface**: Clean and minimalist design for easy navigation.
-2. **News Categories**: Covers various categories such as Sports, Entertainment, Technology, and more.
-3. **Polls and Surveys**: Engage with our audience through interactive polls and surveys.
-4. **Premium Content**: Special access for premium users to exclusive articles.
-5. **Article Approval System**: Admins can approve or reject submitted articles.
-6. **Search Functionality**: Easily search through articles based on keywords and topics.
-7. **Trending News**: Display the most viewed and trending news articles.
-8. **Responsive Design**: Optimized for mobile, tablet, and desktop screens.
-9. **Newsletter Signup**: Users can subscribe to receive updates via email.
-10. **Comments Section**: Users can comment on articles and engage with others.
-11. **Admin features**: Admin can control all activities make content premium or delete or decline content or approve.
+- **User-Friendly Interface**: Clean and minimalist design for easy navigation.
+- **News Categories**: Covers various categories such as Sports, Entertainment, Technology, and more.
+- **Polls and Surveys**: Engage with our audience through interactive polls and surveys.
+- **Premium Content**: Special access for premium users to exclusive articles.
+- **Article Approval System**: Admins can approve or reject submitted articles.
+- **Search Functionality**: Easily search through articles based on keywords and topics.
+- **Trending News**: Display the most viewed and trending news articles.
+- **Responsive Design**: Optimized for mobile, tablet, and desktop screens.
+- **Newsletter Signup**: Users can subscribe to receive updates via email.
+-  **Comments Section**: Users can comment on articles and engage with others.
+-  **Admin features**: Admin can control all activities make content premium or delete or decline content or approve.
 
 ---
 ## 🛠️ Technologies Used  

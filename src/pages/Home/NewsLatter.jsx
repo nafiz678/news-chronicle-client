@@ -13,7 +13,7 @@ const NewsletterSignup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 py-6 flex flex-col items-center justify-center px-6">
+    <div className="min-h-screen bg-gradient-to-b from-[#E3E3E3] via-gray-600 to-gray-900 py-6 flex flex-col items-center justify-center px-6">
       <div className="w-full max-w-4xl bg-gray-800 shadow-lg rounded-lg p-8 lg:p-12 text-gray-200">
         {!isSubmitted ? (
           <div>
