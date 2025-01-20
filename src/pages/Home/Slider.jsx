@@ -27,7 +27,7 @@ const SwiperSlider = () => {
           return !article.isPremium;
         }
         return true; // Show all articles for other roles
-      }).filter(article => article.status === "approved").sort((a, b) => b.views - a.views); 
+      }).filter(article => article.status === "approved").sort((a, b) => b.views - a.views).slice(0,6); 
 
     console.log(newArticles)
 
