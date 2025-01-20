@@ -1,15 +1,8 @@
-
-import useRole from "@/hooks/useRole";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
-const ArticleCard = ({ article }) => {
-
-    const [role] = useRole()
-
+const PremiumArticleCard = ({article}) => {
     const { title, description, postedDate, publisher,  image, isPremium, _id,  } = article || {}
-
-
     return (
         <div className={`group w-full border border-black/20 ${isPremium ? "bg-orange-50 hover:bg-orange-300" : ""} rounded-xl transition-all duration-300 ease-in-out`}>
             <div className="h-auto hover:shadow-xl p-4 overflow-hidden rounded-xl transition-all ease-in-out duration-300 flex items-center justify-center flex-col">
@@ -31,7 +24,7 @@ const ArticleCard = ({ article }) => {
                     <p className="text-black/80 h-24 overflow-auto">{description.slice(0, 100)}...<button disabled={isPremium} className="font-semibold"> see more </button></p>
                 </div>
                 <div className="flex items-center justify-end w-full">
-                    <button disabled={isPremium} className="btn btn-outline btn-sm my-2 justify-self-end"> <Link to={`/article/${_id}`}>Details</Link> </button>
+                    <button className="btn btn-outline btn-sm my-2 justify-self-end"> <Link to={`/article/${_id}`}>Details</Link> </button>
                 </div>
             </div>
 
@@ -39,4 +32,4 @@ const ArticleCard = ({ article }) => {
     );
 };
 
-export default ArticleCard;
+export default PremiumArticleCard;

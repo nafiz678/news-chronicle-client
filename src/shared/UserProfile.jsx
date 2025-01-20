@@ -59,7 +59,7 @@ const UserProfile = () => {
                                 <h1 className="text-4xl font-bold">{user.displayName}</h1>
                                 <p className="text-lg">{user.email}</p>
                                 <p className="mt-4 text-lg font-light">{user.description || "No description available."}</p>
-                                {DBuser.premiumTaken ? <p className='text-black/80 inline-block px-2 rounded-full bg-orange-500'>Premium Ends: {moment(DBuser?.premiumTaken).endOf('day').fromNow()}</p>:""}
+                                {DBuser.premiumTaken ? <p className='text-black/80 inline-block px-2 rounded-full bg-orange-500'>Premium Ends {moment(DBuser?.premiumTaken).endOf('second',).fromNow()}</p>:""}
                             </div>
                         </div>
                     </div>
