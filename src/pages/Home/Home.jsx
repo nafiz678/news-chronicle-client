@@ -3,6 +3,8 @@ import PlansSection from "@/components/PlansSection";
 import Statistic from "@/components/Statistics";
 import CarouselSlider from "./Slider";
 import { Helmet } from "react-helmet-async";
+import NewsletterSignup from "./NewsLatter";
+import PollsSection from "./PollsSection";
 
 const Home = () => {
     const stats = {
@@ -27,9 +29,16 @@ const Home = () => {
             </div>
 
             <div>
+                <PollsSection></PollsSection>
+            </div>
+
+            <div>
                 <AllPublishers></AllPublishers>
             </div>
 
+            <div>
+                <NewsletterSignup></NewsletterSignup>
+            </div>
         </div>
     );
 };

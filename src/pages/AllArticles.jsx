@@ -56,14 +56,14 @@ const AllArticles = () => {
                 <title>All Articles || News Chronicle</title>
             </Helmet>
             <div className="w-11/12 mx-auto pt-10">
-                <div className="flex items-center justify-between px-2">
+                <div className="flex items-center flex-col lg:flex-row justify-between px-2">
                     <div>
-                        <h2 className="text-3xl font-medium">All News</h2>
+                        <h2 className="text-3xl font-medium mb-6 lg:mb-0">All News</h2>
                     </div>
                     {/* search filter section */}
-                    <nav className="flex items-center justify-center gap-6">
+                    <nav className="flex items-center flex-col md:flex-row justify-center gap-6">
                         {/* filter section */}
-                        <div>
+                        <div className="w-full">
                             <select
                                 id="publisher"
                                 name="publisher"
@@ -101,7 +101,7 @@ const AllArticles = () => {
                         </div>
 
                         {/* filter by tags */}
-                        <div>
+                        <div className="w-full">
                             <select
                                 id="tags"
                                 name="tags"

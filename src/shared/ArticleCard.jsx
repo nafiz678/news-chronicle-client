@@ -11,9 +11,9 @@ const ArticleCard = ({ article }) => {
 
 
     return (
-        <div className={`group w-full border border-black/20 ${isPremium ? "bg-orange-50 hover:bg-orange-300" : ""} rounded-xl transition-all duration-300 ease-in-out`}>
-            <div className="h-auto hover:shadow-xl p-4 overflow-hidden rounded-xl transition-all ease-in-out duration-300 flex items-center justify-center flex-col">
-                <div className="w-full overflow-hidden rounded-xl">
+        <div className={`group w-full border border-black/20 ${isPremium ? "bg-orange-50 hover:bg-orange-300" : ""} rounded-xl transition-all duration-300 ease-in-out `}>
+            <div className="h-auto  hover:shadow-xl p-4 overflow-hidden rounded-xl transition-all ease-in-out duration-300 flex items-center justify-center flex-col">
+                <div className="w-full overflow-hidden rounded-xl flex items-center justify-center">
                     <img src={image} className="w-72 h-56 group-hover:scale-110 transition-all duration-300 ease-in-out  rounded-xl object-cover" alt="" />
                 </div>
                 <div className="mt-4 space-y-3">

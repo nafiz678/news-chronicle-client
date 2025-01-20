@@ -45,10 +45,10 @@ const ArticleDetails = () => {
                     <Loader></Loader> <h1 className="text-4xl">Loading</h1></div>
                 :
                 <div className='bg-white/65 pb-10 pt-2'>
-                    <div className='my-10 w-11/12 mx-auto p-6'>
-                        <div className="flex items-start justify-between">
-                            <div className="w-8/12 relative bg-gradient-to-b from-white to-white">
-                                <img className='rounded-l-lg h-[700px] w-auto object-cover' src={image} alt="" />
+                    <div className='my-10 md:w-11/12 mx-auto p-6'>
+                        <div className="flex items-start justify-between flex-col md:flex-row">
+                            <div className="md:w-8/12 w-full relative bg-gradient-to-b from-white to-white">
+                                <img className='md:rounded-r-none rounded-lg  md:h-[700px] w-auto object-cover h-auto' src={image} alt="" />
                                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
                                     <h2 className="text-2xl sm:text-3xl font-bold text-white">
                                         {article.title}
@@ -56,11 +56,11 @@ const ArticleDetails = () => {
 
                                 </div>
                             </div>
-                            <div className='md:w-4/12 h-[700px]  rounded-r-lg bg-background pt-6 pl-4 '>
+                            <div className='md:w-4/12 md:h-[700px] pb-8 lg:mb-0 md:rounded-l-none rounded-b-lg bg-background pt-6 pl-4 overflow-auto'>
                                 {/* sidebar information */}
 
                                 <h1 className='text-2xl mb-4'><span className='font-medium'>Title:</span> {title}</h1>
-                                <div className='space-y-2'>
+                                <div className='space-y-2 '>
                                     <p><b>Author:</b> {authorName}</p>
                                     <p><b>Publisher:</b> {authorName}</p>
                                     <p className=''><b>Tags:</b> {tags.map((tag, idx) => <span className='badge badge-outline mr-2 p-2' key={idx}>{tag.value}</span>)}</p>
