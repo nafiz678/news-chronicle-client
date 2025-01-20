@@ -1,6 +1,7 @@
 import AllPublishers from "@/components/AllPublisher";
 import PlansSection from "@/components/PlansSection";
 import Statistic from "@/components/Statistics";
+import CarouselSlider from "./Slider";
 
 const Home = () => {
     const stats = {
@@ -10,7 +11,10 @@ const Home = () => {
     };
     return (
         <div>
-            <h1 className="text-2xl font-bold">this section is for slider</h1>
+            
+            <div>
+                <CarouselSlider></CarouselSlider>
+            </div>
             <div>
                 <PlansSection></PlansSection>
             </div>

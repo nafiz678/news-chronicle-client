@@ -9,7 +9,7 @@ const PlansSection = () => {
     return (
         <section className={`plans-section ${pathname === "/" ? "pt-24" : "pt-0" }  pb-10 `}>
             <div className="md:w-11/12 w-full flex flex-col items-center justify-center p-8 rounded-lg mx-auto text-center ">
-                <h2 className={`text-4xl font-semibold ${pathname === "/" ? "text-gray-800" : "text-gray-300"} mb-8`}>Explore Our Premium Plans</h2>
+                <h2 className={`lg:text-5xl md:text-4xl text-3xl text-start lg:text-center font-semibold ${pathname === "/" ? "text-gray-800" : "text-gray-300"} mb-8`}>Explore Our Premium Plans</h2>
                 <p className="text-lg text-gray-600 mb-12">Choose the best plan to suit your needs. Get more with exclusive content, features, and support!</p>
                 <div className="plans-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
@@ -24,7 +24,7 @@ const PlansSection = () => {
                         <p className="text-gray-600 text-start ml-4 mb-6">Great for casual readers with limited access to articles.</p>
 
                         <ul className="text-start text-gray-600 mt-4 space-y-3 pl-5">
-                            <li className="flex items-center"><AiOutlineCheck className="inline text-green-500 mr-2" /> Limited posts 1 article</li>
+                            <li className="flex items-center"><AiOutlineCheck className="inline text-green-500 mr-2" /> No Post Limit</li>
                             <li className="flex items-center"><AiOutlineCheck className="inline text-green-500 mr-2" /> Access to basic news</li>
                             <li className="flex items-center"><AiOutlineCheck className="inline text-green-500 mr-2" />Low Duration</li>
                             <li className="flex items-center"><AiOutlineClose className="inline text-red-500 mr-2" /> No Premium Articles</li>

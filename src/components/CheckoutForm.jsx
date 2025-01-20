@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const CheckoutForm = ({ price }) => {
-    const { user, isSubscribe, setIsSubscribe } = useAuth()
+    const { user, setIsSubscribe } = useAuth()
     const [clientSecret, setClientSecret] = useState("")
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
@@ -25,8 +25,6 @@ const CheckoutForm = ({ price }) => {
             console.log(error)
         }
     }
-
-    console.log(clientSecret)
 
 
     const stripe = useStripe();

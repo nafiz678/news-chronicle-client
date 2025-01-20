@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import Home from "@/pages/Home";
+import Home from "@/pages/Home/Home";
 import AddArticles from "@/pages/AddArticles";
 import AllArticles from "@/pages/AllArticles";
 import Dashboard from "@/pages/Dashboard/Dashboard";
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/article/:id",
-                element: <ArticleDetails></ArticleDetails>,
+                element: <PrivateRoute><ArticleDetails></ArticleDetails></PrivateRoute> ,
 
             },
             {

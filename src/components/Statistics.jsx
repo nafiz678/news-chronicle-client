@@ -3,14 +3,32 @@ import CountUp from "react-countup";
 import { FaCrown, FaUser, FaUsers } from "react-icons/fa";
 import AnimatedShinyText from "./ui/animated-shiny-text";
 import { cn } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 
-const Statistic = ({ stats }) => {
+const Statistic = () => {
+  const axiosPublic = useAxiosPublic()
+
+  const {data=[]} = useQuery({
+    queryKey: ["stats"],
+    queryFn: async ()=>{
+      const {data} = await axiosPublic.get("/all-users-stat")
+      return data
+    }
+  })
+  
+      const normal = data.filter(item=> item.role === "user")
+      const premium = data.filter(item=> item.role === "premium" || item.role === "admin")
+
+  const stats = {
+    totalUsers: data.length, normalUsers: normal.length, premiumUsers: premium.length
+  }
   const { totalUsers, normalUsers, premiumUsers } = stats;
 
   
-  const { ref: totalUsersRef, inView: totalUsersInView } = useInView({ triggerOnce: true, threshold: 0.5 });
-  const { ref: normalUsersRef, inView: normalUsersInView } = useInView({ triggerOnce: true, threshold: 0.5 });
-  const { ref: premiumUsersRef, inView: premiumUsersInView } = useInView({ triggerOnce: true, threshold: 0.5 });
+  const { ref: totalUsersRef, inView: totalUsersInView } = useInView({ triggerOnce: true, threshold: 1 });
+  const { ref: normalUsersRef, inView: normalUsersInView } = useInView({ triggerOnce: true, threshold: 1 });
+  const { ref: premiumUsersRef, inView: premiumUsersInView } = useInView({ triggerOnce: true, threshold: 1 });
 
   return (
     <div className="mb-10 flex flex-col justify-center items-center bg-background p-4">

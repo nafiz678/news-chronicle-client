@@ -2,10 +2,12 @@ import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { useEffect, useState } from 'react'
 import subscribe from "@/assets/file.png"
 import { Link } from 'react-router-dom'
+import useRole from '@/hooks/useRole'
 
 
 function PopupModal() {
     let [isOpen, setIsOpen] = useState(false)
+    const [role] = useRole()
 
     function close() {
         setIsOpen(false)
@@ -13,9 +15,11 @@ function PopupModal() {
 
     useEffect(() => {
         setTimeout(() => {
-            setIsOpen(true)
+            if(role=== "user") {
+                setIsOpen(true)
+            }
         }, 10000);
-    }, [])
+    }, [role])
 
     return (
         <>

@@ -185,8 +185,8 @@ const AllArticlesForAdmin = () => {
                                         </td>
                                         <td className="capitalize text-nowrap">{article.authorName}
                                         {article.postedDate && 
-                                        <td data-tooltip-id="my-tooltip" data-tooltip-content={moment(article.postedDate).format('lll')}
-                                         className="p-0">Date: {moment(article.postedDate).format('ll')}</td>}
+                                        <p data-tooltip-id="my-tooltip" data-tooltip-content={moment(article.postedDate).format('lll')}
+                                         className="p-0">Date: {moment(article.postedDate).format('ll')}</p>}
                                         </td>
                                         <th>
                                             {article.authorEmail}
