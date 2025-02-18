@@ -23,6 +23,6 @@ export const saveUser = async (user) => {
             image: user.photoURL,
         })
     } catch (error) {
-        console.log(error);
+        
     }
 }

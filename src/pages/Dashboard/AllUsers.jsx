@@ -46,7 +46,7 @@ const AllUsers = () => {
             if (result.isConfirmed) {
                 const { data } = await axiosSecure.patch(`/make-admin/${email}`)
                 if (data.modifiedCount > 0) {
-                    console.log(data)
+                    
                     refetch()
                     Swal.fire({
                         title: "Approved",

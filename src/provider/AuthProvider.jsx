@@ -52,7 +52,6 @@ const AuthProvider = ({ children }) => {
             if (currentUser?.email) {
                 setUser(currentUser)
                 setIsSubscribe(true)
-                console.log(isSubscribe)
                 const userInfo = { email: currentUser.email, }
                 // get token and store client
                 axiosPublic.post("/jwt", userInfo)
@@ -72,14 +71,14 @@ const AuthProvider = ({ children }) => {
 
                         if (premiumTakenDate < new Date()) {
                             const { data } = await axiosPublic.patch(`/update-user-basic/${currentUser.email}`)
-                            // console.log(data)
+                           
                             if (data.modifiedCount) {
                                 setIsSubscribe(false)                            }
                         } else {
-                            // console.log("Premium Taken Date is in the future.", premiumTakenDate);
+                            
                         }
                     } else {
-                        // console.log("Premium Taken Date is undefined or null.");
+                        
                     }
                 }
 

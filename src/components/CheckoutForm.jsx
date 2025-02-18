@@ -22,7 +22,7 @@ const CheckoutForm = ({ price }) => {
             const { data } = await axiosSecure.post(`create-payment-intent`, { email: user?.email, price: price })
             setClientSecret(data.clientSecret)
         } catch (error) {
-            console.log(error)
+            
         }
     }
 
@@ -51,9 +51,9 @@ const CheckoutForm = ({ price }) => {
         });
 
         if (error) {
-            console.log('[error]', error);
+            
         } else {
-            console.log('[PaymentMethod]', paymentMethod);
+            
         }
 
         // confirm payment
@@ -81,15 +81,11 @@ const CheckoutForm = ({ price }) => {
                     return;
                 }
 
-                console.log("Payment amount:", paymentIntent.amount);
-
                 // API call to update user role
                 const { data } = await axiosSecure.post("/update-user", { email: user?.email, price: paymentIntent.amount });
-                console.log("Update user response:", data);
                 setIsSubscribe(true)
                 navigate("/")
                 const { data:role } = await axiosSecure.get(`/users/role/${user?.email}`)
-                console.log(role)
                 toast.success(`Congrats, You have taken the ${paymentIntent.amount === 500 ? "Standard" : "Premium"} Subscription`)
             } catch (error) {
                 console.error("Error updating user role:", error);

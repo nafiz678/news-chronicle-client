@@ -70,7 +70,7 @@ const AddArticles = () => {
         try {
             const imageURL = await imageUpload(formData.image)
             const newData = { ...formData, image: imageURL, status: "pending", isPremium: false, views: 0, postedDate: Date.now(), authorEmail: user.email, authorName: user.displayName, authorPhoto: user.photoURL }
-            console.log(newData)
+            
             // post article in db
             await axiosSecure.post("/add-article", {article: newData, email: user?.email})
             toast.success("Article added please wait for admin approval", { duration: 5000 })
@@ -84,7 +84,7 @@ const AddArticles = () => {
             });
             navigate("/my-articles")
         } catch (error) {
-            console.log(error)
+            
             toast.error(error.response.data.message)
         }
     };

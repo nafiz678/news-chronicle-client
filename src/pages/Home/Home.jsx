@@ -5,6 +5,7 @@ import CarouselSlider from "./Slider";
 import { Helmet } from "react-helmet-async";
 import NewsletterSignup from "./NewsLatter";
 import PollsSection from "./PollsSection";
+import { Testimonial } from "./Testimonial";
 
 const Home = () => {
     const stats = {
@@ -18,10 +19,10 @@ const Home = () => {
                 <title>Home || News Chronicle</title>
             </Helmet>
             <div>
-                <CarouselSlider></CarouselSlider>
+                <CarouselSlider />
             </div>
             <div>
-                <PlansSection></PlansSection>
+                <PlansSection />
             </div>
 
             <div>
@@ -29,15 +30,19 @@ const Home = () => {
             </div>
 
             <div>
-                <PollsSection></PollsSection>
+                <PollsSection />
             </div>
 
             <div>
-                <AllPublishers></AllPublishers>
+                <AllPublishers />
             </div>
 
             <div>
-                <NewsletterSignup></NewsletterSignup>
+                <Testimonial />
+            </div>
+
+            <div>
+                <NewsletterSignup />
             </div>
         </div>
     );

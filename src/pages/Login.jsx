@@ -30,7 +30,7 @@ const Login = () => {
             navigate(from, { replace: true })
             toast.success('Login Successful')
         } catch (err) {
-            console.log(err)
+            
             setLoading(false)
             toast.error(err?.message)
         }
@@ -48,7 +48,7 @@ const Login = () => {
             toast.success('Login Successful')
 
         } catch (err) {
-            console.log(err)
+            
             toast.error(err?.message)
         } finally {
             setLoading(false)

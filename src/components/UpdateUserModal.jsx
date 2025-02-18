@@ -32,7 +32,7 @@ export default function UpdateUserProfile({ isOpen, close }) {
         try {
             await updateUser(name, imageUrl);
             const { data } = await axiosSecure.patch(`/update-user`, { name: name, image: imageUrl, email: user?.email })
-            console.log(data)
+            
             if (data.modifiedCount > 0) {
                 toast.success("User updated successfully");
                 close()

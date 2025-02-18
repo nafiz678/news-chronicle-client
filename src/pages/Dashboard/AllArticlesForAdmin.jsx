@@ -88,12 +88,12 @@ const AllArticlesForAdmin = () => {
                 toast.error(data.message || "Failed to decline the article");
             }
         } catch (error) {
-            console.log(error)
+            
         }
     }
 
     const handleDeleteArticle = (id) => {
-        console.log(id)
+        
         Swal.fire({
             title: "Are you sure?",
             text: "You wont be able to recover this",

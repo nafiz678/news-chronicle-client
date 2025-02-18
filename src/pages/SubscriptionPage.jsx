@@ -29,11 +29,6 @@ const SubscriptionPage = () => {
     }
   };
 
-  // Navigate to the payment page when user clicks the "Subscribe" button
-  // const handleSubscription = () => {
-  //   console.log("Payment page/modal");
-
-  // };
 
   return (
     <div className="pb-20 bg-gradient-to-b from-gray-800 via-gray-800 to-gray-900 text-white">

@@ -19,7 +19,7 @@ const PremiumArticles = () => {
 
 
     const approvedArticles = articles.filter(article => article.status === "approved").filter(item=> item.isPremium)
-    console.log(approvedArticles)
+    
 
 
     return (

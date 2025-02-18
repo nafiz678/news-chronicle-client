@@ -25,7 +25,7 @@ const PollsSection = () => {
   };
 
   return (
-    <div className="bg-gradient-to-t from-[#E3E3E3] via-black to-[#E3E3E3] py-12 px-6 sm:px-8">
+    <div className="bg-gradient-to-t from-[#E3E3E3] via-white to-[#E3E3E3] py-12 px-6 sm:px-8">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-3xl lg:text-4xl font-bold text-black mb-8">
           Share Your Opinion: Participate in Our Polls
@@ -39,20 +39,20 @@ const PollsSection = () => {
         {polls.map((poll, pollIndex) => (
           <div
             key={pollIndex}
-            className="bg-gray-800 p-6 rounded-xl shadow-lg mb-8"
+            className="bg-white p-6 rounded-xl shadow-lg mb-8"
           >
-            <h3 className="text-2xl lg:text-3xl font-semibold text-white mb-4">
+            <h3 className="text-2xl lg:text-3xl font-semibold  mb-4">
               {poll.question}
             </h3>
             <div className="space-y-4">
               {poll.options.map((option, optionIndex) => (
                 <div
                   key={optionIndex}
-                  className="flex items-center justify-between bg-gray-700 rounded-lg p-4 cursor-pointer hover:bg-gray-600"
+                  className="flex items-center justify-between bg-gray-300 rounded-lg p-4 cursor-pointer hover:bg-gray-400"
                   onClick={() => handleVote(pollIndex, optionIndex)}
                 >
-                  <div className="text-lg text-white">{option}</div>
-                  <div className="text-sm text-gray-300">
+                  <div className="text-lg ">{option}</div>
+                  <div className="text-sm ">
                     {((poll.votes[optionIndex] /
                       getTotalVotes(pollIndex)) *
                       100).toFixed(1)}
@@ -64,7 +64,7 @@ const PollsSection = () => {
 
             {/* Results */}
             <div className="mt-6">
-              <h4 className="text-lg text-white mb-4">Poll Results:</h4>
+              <h4 className="text-lg  mb-4">Poll Results:</h4>
               {poll.options.map((option, optionIndex) => {
                 const totalVotes = getTotalVotes(pollIndex);
                 const percentage =
@@ -74,14 +74,14 @@ const PollsSection = () => {
                     key={optionIndex}
                     className="mb-4"
                   >
-                    <div className="flex justify-between text-white">
+                    <div className="flex justify-between">
                       <span>{option}</span>
                       <span>{percentage.toFixed(1)}%</span>
                     </div>
-                    <div className="w-full bg-gray-600 h-2 rounded-full">
+                    <div className="w-full bg-gray-300 h-2 rounded-full">
                       <div
                         style={{ width: `${percentage}%` }}
-                        className="h-2 bg-white rounded-full"
+                        className="h-2 bg-black rounded-full"
                       ></div>
                     </div>
                   </div>
@@ -96,7 +96,7 @@ const PollsSection = () => {
           <h4 className="text-lg font-semibold text-black mb-4">
             Want more polls like this?
           </h4>
-          <button className="px-8 py-3 bg-white text-black rounded-lg shadow-md hover:bg-gray-300 transition-all">
+          <button className="px-8 py-3 bg-slate-800 text-white rounded-lg shadow-md hover:bg-slate-900 transition-all">
             Take More Polls
           </button>
         </div>

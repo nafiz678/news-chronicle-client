@@ -25,7 +25,7 @@ const SignUp = () => {
 
         // setLoading(true)
         const imageURL = await imageUpload(image)
-        console.log(imageURL)
+        
         try {
             if (!passwordRegex.test(password)) {
                 return toast.error("Must be 6+ chars with a number, uppercase, & special character.")
@@ -35,7 +35,7 @@ const SignUp = () => {
             const result = await createUser(email, password)
             //3. Save username & profile photo
             await updateUser(name, imageURL)
-            console.log(result)
+            
             const user = result.user
             const newUser = { ...user, name, imageURL }
             setUser(newUser)
@@ -47,7 +47,7 @@ const SignUp = () => {
             toast.success('Signup Successful')
 
         } catch (err) {
-            console.log(err)
+            
             toast.error(err?.message)
 
         } finally {
@@ -66,7 +66,7 @@ const SignUp = () => {
             navigate('/')
             toast.success('Signup Successful')
         } catch (err) {
-            console.log(err)
+            
             toast.error(err?.message)
         }finally{
             setLoading(false)
