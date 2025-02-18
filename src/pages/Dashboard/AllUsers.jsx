@@ -73,7 +73,7 @@ const AllUsers = () => {
                     <Loader></Loader> <h1 className="text-4xl">Loading</h1></div>
                 :
                 users.length > 0 ?
-                    <div className="overflow-x-auto w-11/12 mx-auto">
+                    <div className="overflow-x-auto dark:text-black w-11/12 mx-auto">
                         <table className="table">
                             {/* head */}
                             <thead>

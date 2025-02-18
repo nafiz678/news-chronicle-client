@@ -69,10 +69,10 @@ const AllArticles = () => {
                                 name="publisher"
                                 value={publisher}
                                 onChange={(e) => setPublisher(e.target.value)}
-                                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full p-2 border dark:text-black border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 required
                             >
-                                <option value="" disabled>Select a Publisher</option>
+                                <option value="" className="" disabled>Select a Publisher</option>
                                 {publishers.map((publisher) => (
                                     <option key={publisher._id} value={publisher.publisherName}>
                                         {publisher.publisherName}
@@ -107,7 +107,7 @@ const AllArticles = () => {
                                 name="tags"
                                 value={tags}
                                 onChange={(e) => setTags(e.target.value)}
-                                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full p-2 border dark:text-black border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 required
                             >
                                 <option disabled value=''>Select a tag</option>

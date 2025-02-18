@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import NewsletterSignup from "./NewsLatter";
 import PollsSection from "./PollsSection";
 import { Testimonial } from "./Testimonial";
+import ChallengeOfTheWeek from "./WeekChallange";
 
 const Home = () => {
     const stats = {
@@ -39,6 +40,10 @@ const Home = () => {
 
             <div>
                 <Testimonial />
+            </div>
+
+            <div>
+                <ChallengeOfTheWeek />
             </div>
 
             <div>

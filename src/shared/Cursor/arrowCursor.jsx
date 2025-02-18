@@ -38,7 +38,7 @@ const ArrowCursor = () => {
     },
   };
   return (
-    <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-50 hidden lg:inline">
+    <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[99999] hidden lg:inline">
       <AnimatePresence>
         {direction && (
           <motion.div

@@ -68,7 +68,7 @@ const MyArticles = () => {
                         <table className="table">
                             {/* head */}
                             <thead>
-                                <tr>
+                                <tr className="dark:text-white">
                                     <th>#</th>
                                     <th>Article title</th>
                                     <th>Status</th>
@@ -110,9 +110,9 @@ const MyArticles = () => {
                                             <Link to={`/update-article/${article?._id}`}>
                                                 <Button
                                                     size="sm"
-                                                    className="rounded-md  text-sm font-medium text-white focus:outline-none"
+                                                    className="rounded-md dark:text-black text-sm font-medium text-white focus:outline-none"
                                                 >
-                                                    <CiEdit></CiEdit>
+                                                    <CiEdit />
                                                 </Button>
                                             </Link>
 

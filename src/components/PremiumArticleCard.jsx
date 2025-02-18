@@ -12,15 +12,15 @@ const PremiumArticleCard = ({article}) => {
                 <div className="mt-4 space-y-3">
                     {/* all information here */}
                     <div className="flex items-center justify-start gap-2">
-                        <div className="text-sm flex items-center justify-normal gap-1">
+                        <div className="text-sm dark:text-black flex items-center justify-normal gap-1">
                             
                             <p>{publisher.slice(0,8)}...</p>
                         </div>
                         <p>●</p>
-                        <p>{moment(postedDate).format('ll')}</p>
+                        <p className="dark:text-black">{moment(postedDate).format('ll')}</p>
                         {isPremium && <p className="badge bg-orange-500">Premium</p> }
                     </div>
-                    <h1 className="text-2xl font-medium h-16 overflow-auto">{title}</h1>
+                    <h1 className="text-2xl dark:text-black font-medium h-16 overflow-auto">{title}</h1>
                     <p className="text-black/80 h-24 overflow-auto">{description.slice(0, 100)}...<button disabled={isPremium} className="font-semibold"> see more </button></p>
                 </div>
                 <div className="flex items-center justify-end w-full">

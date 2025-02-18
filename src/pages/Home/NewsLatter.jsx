@@ -13,15 +13,15 @@ const NewsletterSignup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#E3E3E3]  to-black py-6 flex flex-col items-center justify-center px-6">
-      <div className="w-full max-w-4xl bg-gray-800 shadow-lg rounded-lg p-8 lg:p-12 text-gray-200">
+    <div className="min-h-screen bg-background py-6 flex flex-col items-center justify-center px-6">
+      <div className="w-full max-w-4xl bg-transparent dark:bg-transparent border-2 border-gray-400 rounded-lg p-8 lg:p-12 dark:text-gray-200">
         {!isSubmitted ? (
           <div>
             {/* Header */}
-            <h1 className="text-3xl lg:text-5xl font-bold text-white text-center mb-4">
+            <h1 className="text-3xl lg:text-5xl font-bold dark:text-white text-black text-center mb-4">
               Stay Updated with the Latest News
             </h1>
-            <p className="text-gray-300 text-center lg:text-lg mb-8">
+            <p className="dark:text-gray-300 text-gray-500 text-center lg:text-lg mb-8">
               Join our newsletter to get the latest stories, insights, and
               updates directly in your inbox.
             </p>
@@ -33,7 +33,7 @@ const NewsletterSignup = () => {
                   <i className="fas fa-bell"></i>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold dark:text-white text-black">
                     Instant Alerts
                   </h3>
                   <p className="text-gray-400 text-sm">
@@ -46,7 +46,7 @@ const NewsletterSignup = () => {
                   <i className="fas fa-globe-americas"></i>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold dark:text-white text-black">
                     Global Updates
                   </h3>
                   <p className="text-gray-400 text-sm">
@@ -59,7 +59,7 @@ const NewsletterSignup = () => {
                   <i className="fas fa-star"></i>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold dark:text-white text-black">
                     Exclusive Content
                   </h3>
                   <p className="text-gray-400 text-sm">
@@ -74,7 +74,7 @@ const NewsletterSignup = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-300"
+                  className="block ml-1 mb-1 text-sm font-medium dark:text-white text-black"
                 >
                   Email Address
                 </label>
@@ -84,7 +84,7 @@ const NewsletterSignup = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg shadow-sm text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 text-black border border-gray-600 rounded-lg shadow-sm dark:text-gray-100 focus:outline-none focus:ring-2 bg-background placeholder:text-slate-500"
                   required
                 />
               </div>

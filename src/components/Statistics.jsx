@@ -44,33 +44,33 @@ const Statistic = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
         {/* Total Users Card */}
-        <div ref={totalUsersRef} className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+        <div ref={totalUsersRef} className="bg-white dark:bg-transparent dark:shadow-none dark:border-2 shadow-lg rounded-lg p-6 flex flex-col items-center">
           <div className="bg-blue-500 text-white rounded-full h-16 w-16 flex items-center justify-center mb-4">
             <FaUsers />
           </div>
-          <h2 className="text-xl font-semibold text-gray-700">Total Users</h2>
+          <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">Total Users</h2>
           {totalUsersInView && (
             <CountUp end={totalUsers} duration={2.5} className="text-4xl font-bold text-blue-600" />
           )}
         </div>
 
         {/* Normal Users Card */}
-        <div ref={normalUsersRef} className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+        <div ref={normalUsersRef} className="bg-white dark:bg-transparent dark:shadow-none dark:border-2 shadow-lg rounded-lg p-6 flex flex-col items-center">
           <div className="bg-green-500 text-white rounded-full h-16 w-16 flex items-center justify-center mb-4">
             <FaUser />
           </div>
-          <h2 className="text-xl font-semibold text-gray-700">Normal Users</h2>
+          <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">Normal Users</h2>
           {normalUsersInView && (
             <CountUp end={normalUsers} duration={2.5} className="text-4xl font-bold text-green-600" />
           )}
         </div>
 
         {/* Premium Users Card */}
-        <div ref={premiumUsersRef} className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+        <div ref={premiumUsersRef} className="bg-white dark:bg-transparent dark:shadow-none dark:border-2 shadow-lg rounded-lg p-6 flex flex-col items-center">
           <div className="bg-yellow-500 text-white rounded-full h-16 w-16 flex items-center justify-center mb-4">
             <FaCrown />
           </div>
-          <h2 className="text-xl font-semibold text-gray-700">Premium Users</h2>
+          <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">Premium Users</h2>
           {premiumUsersInView && (
             <CountUp end={premiumUsers} duration={2.5} className="text-4xl font-bold text-yellow-600" />
           )}

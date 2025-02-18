@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import useRole from '@/hooks/useRole';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { FaAngleDown } from "react-icons/fa6";
+import { ModeToggle } from '@/components/toggle';
 
 
 function Navbar() {
@@ -15,7 +16,7 @@ function Navbar() {
     const [role] = useRole()
     if (loading) return
     return (
-        <div className="fixed inset-x-0 max-w-screen-2xl navbar bg-white/70 text-black lg:px-20 py-4 mx-auto z-50 flex justify-between items-center backdrop-blur-xl ">
+        <div className="fixed inset-x-0 max-w-screen-2xl navbar bg-white/70 dark:bg-black/70 text-black lg:px-20 py-4 mx-auto z-[9999] flex justify-between items-center backdrop-blur-xl ">
             <div className="justify-start ">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost xl:hidden">
@@ -59,7 +60,7 @@ function Navbar() {
                     <div className='p-2 rounded-full bg-black'>
                         <img className='w-6 h-6 rounded-full' src={logo} alt="logo" />
                     </div>
-                    <span className='text-xl text-[#2C2F54]'>News Chronicle</span>
+                    <span className='text-xl text-[#2C2F54] dark:text-white'>News Chronicle</span>
                 </Link>
             </div>
             <div className="navbar-end flex-1 hidden xl:flex">
@@ -93,6 +94,7 @@ function Navbar() {
                     {role === "admin" && <li><NavLink className={"mr-3 bg-background rounded-full border bg-[#DCDCDC] border-gray-400 dark:bg-[#DCDCDC] dark:text-background"} to={"/dashboard"}>Dashboard</NavLink></li>}
 
 
+
                 </ul>
             </div>
             {/* login or signup methods */}
@@ -113,6 +115,8 @@ function Navbar() {
                     </Link>
                 </>
             }
+                    <ModeToggle />  
+
 
         </div>
 
