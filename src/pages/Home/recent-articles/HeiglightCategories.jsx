@@ -4,6 +4,7 @@ import { ChevronRight, ChevronDown, ChevronUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import { useNavigate } from "react-router-dom"
 
 // Category data
 const categories = [
@@ -17,7 +18,7 @@ const categories = [
       title: "UN Calls Emergency Meeting on Sudan Conflict",
       summary:
         "The United Nations Security Council has called an emergency meeting to address the escalating humanitarian crisis in Sudan as conflict intensifies.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "https://res.cloudinary.com/dqobn9bhm/image/upload/v1746342881/di8q3t569uxjqq8nwtzc.jpg",
       timestamp: new Date(Date.now() - 10 * 60 * 1000),
       author: "Sarah Johnson",
     },
@@ -25,19 +26,19 @@ const categories = [
       {
         id: 2,
         title: "Elections in India: What to Expect",
-        image: "/placeholder.svg?height=100&width=150",
+        image: "https://res.cloudinary.com/dqobn9bhm/image/upload/v1746343335/nqsejl5pktugn3rmiatn.avif",
         timestamp: new Date(Date.now() - 15 * 60 * 1000),
       },
       {
         id: 3,
         title: "China's Economy Slows Again in Q1",
-        image: "/placeholder.svg?height=100&width=150",
+        image: "https://res.cloudinary.com/dqobn9bhm/image/upload/v1746343560/qk7b0dkpy26ys4eokxlu.gif",
         timestamp: new Date(Date.now() - 30 * 60 * 1000),
       },
       {
         id: 4,
         title: "Brazil Floods Displace 10,000",
-        image: "/placeholder.svg?height=100&width=150",
+        image: "https://res.cloudinary.com/dqobn9bhm/image/upload/v1746343624/mxmdlrny8pn4xd1vqsdd.jpg",
         timestamp: new Date(Date.now() - 45 * 60 * 1000),
       },
     ],
@@ -52,7 +53,7 @@ const categories = [
       title: "Senate Passes Landmark Climate Bill After Marathon Session",
       summary:
         "After 18 hours of debate, the Senate approved a historic climate bill that allocates $500 billion toward renewable energy infrastructure.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "https://res.cloudinary.com/dqobn9bhm/image/upload/v1746343700/dckf0la3d4fzhmxwubdd.jpg",
       timestamp: new Date(Date.now() - 5 * 60 * 1000),
       author: "Michael Roberts",
     },
@@ -60,19 +61,19 @@ const categories = [
       {
         id: 6,
         title: "Supreme Court to Hear Major Voting Rights Case",
-        image: "/placeholder.svg?height=100&width=150",
+        image: "https://res.cloudinary.com/dqobn9bhm/image/upload/v1746343804/rovnsbahx9wk2i0pv59w.jpg",
         timestamp: new Date(Date.now() - 20 * 60 * 1000),
       },
       {
         id: 7,
         title: "Presidential Approval Rating Hits New Low",
-        image: "/placeholder.svg?height=100&width=150",
+        image: "https://res.cloudinary.com/dqobn9bhm/image/upload/v1746344186/izoru88qx5ec0dgienby.webp",
         timestamp: new Date(Date.now() - 40 * 60 * 1000),
       },
       {
         id: 8,
         title: "European Leaders Meet to Discuss Energy Crisis",
-        image: "/placeholder.svg?height=100&width=150",
+        image: "https://res.cloudinary.com/dqobn9bhm/image/upload/v1746344310/igwyx2crj38awwc6nmvk.jpg",
         timestamp: new Date(Date.now() - 60 * 60 * 1000),
       },
     ],
@@ -87,7 +88,7 @@ const categories = [
       title: "AI Breakthrough Could Transform Medical Diagnostics",
       summary:
         "Researchers have developed a new AI system capable of detecting early signs of cancer with 95% accuracy, potentially revolutionizing medical diagnostics.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "https://res.cloudinary.com/dqobn9bhm/image/upload/v1746344369/llgbzafxgvtfsyb6zpos.png",
       timestamp: new Date(Date.now() - 25 * 60 * 1000),
       author: "Jessica Chen",
     },
@@ -95,19 +96,19 @@ const categories = [
       {
         id: 10,
         title: "New Smartphone Folds in Three Places",
-        image: "/placeholder.svg?height=100&width=150",
+        image: "https://static.hub.91mobiles.com/wp-content/uploads/sites/9/2024/09/Huawei-Mate-XT.jpg",
         timestamp: new Date(Date.now() - 35 * 60 * 1000),
       },
       {
         id: 11,
         title: "Quantum Computing Milestone Achieved",
-        image: "/placeholder.svg?height=100&width=150",
+        image: "https://pme.uchicago.edu/sites/default/files/styles/max_width_full/public/2023-10/16x9-NaturePhysicsCoverImageDesign2.jpg?itok=16bxHTwk",
         timestamp: new Date(Date.now() - 50 * 60 * 1000),
       },
       {
         id: 12,
         title: "Major Tech Companies Face New Antitrust Probe",
-        image: "/placeholder.svg?height=100&width=150",
+        image: "https://tii.imgix.net/production/articles/5056/f11d3a61-4c79-49fb-8a13-b553cbd9adac.jpg?auto=compress&fit=crop&auto=format",
         timestamp: new Date(Date.now() - 70 * 60 * 1000),
       },
     ],
@@ -176,6 +177,7 @@ const getCategoryColorClasses = (color) => {
 
 export default function CategoryHighlights() {
   const [expandedCategories, setExpandedCategories] = useState({})
+  const navigate = useNavigate()
 
   // Toggle category expansion (for mobile)
   const toggleCategory = (categoryId) => {
@@ -206,7 +208,7 @@ export default function CategoryHighlights() {
                   variant="ghost"
                   size="sm"
                   className="hidden md:flex items-center text-sm font-medium"
-                  onClick={() => alert(`View all ${category.name} articles`)}
+                  onClick={() => navigate("/all-articles")}
                 >
                   View All
                   <ChevronRight className="ml-1 h-4 w-4" />
@@ -229,7 +231,7 @@ export default function CategoryHighlights() {
                     "hover:shadow-lg cursor-pointer",
                     colorClasses.hover,
                   )}
-                  onClick={() => alert(`Reading: ${category.featured.title}`)}
+                  onClick={() => navigate("/all-articles")}
                 >
                   <div className="relative">
                     <img
@@ -268,7 +270,7 @@ export default function CategoryHighlights() {
                           "hover:shadow-md cursor-pointer",
                           colorClasses.hover,
                         )}
-                        onClick={() => alert(`Reading: ${article.title}`)}
+                        onClick={() => navigate("/all-articles")}
                       >
                         <div className="flex flex-col h-full">
                           <img
