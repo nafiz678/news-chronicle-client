@@ -80,7 +80,7 @@ const Login = () => {
                                 id="email"
                                 name="email"
                                 placeholder="Type here"
-                                className="mt-1 block w-full border border-gray-300 bg-white rounded-md p-2.5 focus:ring-2 focus:ring-blue-500"
+                                className="mt-1 block w-full border border-gray-300 bg-white rounded-md p-2.5 focus:ring-2 focus:ring-blue-500 text-black"
                             />
                         </div>
 
