@@ -1,11 +1,10 @@
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import ArticleCard from "@/shared/ArticleCard";
 import Loader from "@/shared/LoaderSpinner";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion"
-import { Calendar, Eye, Award, ChevronRight, Filter } from "lucide-react"
+import { Calendar, Eye, Award, ChevronRight, RefreshCw } from "lucide-react"
 import { format } from "date-fns"
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -76,6 +75,12 @@ const AllArticles = () => {
         if (text.length <= maxLength) return text
         return text.substring(0, maxLength) + "..."
     }
+
+    const handleReset = (e) => {
+        e.preventDefault()
+        setTags("")
+        setPublisher("")
+    }
     return (
         <div>
             <Helmet>
@@ -140,6 +145,12 @@ const AllArticles = () => {
                                 {tagOptions.map((tag, idx) =>
                                     <option key={idx} value={tag.value}>{tag.label}</option>)}
                             </select>
+                        </div>
+
+                        <div className="">
+                            <Button onClick={(e) => handleReset(e)}>
+                                <RefreshCw /> Refresh
+                            </Button>
                         </div>
                     </nav>
                 </div>
