@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 import { cn } from "@/lib/utils"
+import { useNavigate } from "react-router-dom"
 
 // Breaking news data
 const breakingNews = [
@@ -87,6 +88,7 @@ export default function BreakingNews() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [showTooltip, setShowTooltip] = useState(null)
   const tickerRef = useRef(null)
+  const navigate = useNavigate()
 
   // Auto-scroll ticker
   useEffect(() => {
@@ -109,7 +111,7 @@ export default function BreakingNews() {
   }
 
   return (
-    <div className="bottom-0 w-6/12 fixed right-0 dark:bg-gray-900 bg-gray-200 rounded-lg overflow-hidden shadow-lg">
+    <div className="bottom-0 w-6/12 z-50 fixed right-0 dark:bg-gray-900 bg-gray-200 rounded-lg overflow-hidden shadow-lg">
       {/* Header */}
       {/* <div className="flex items-center justify-between bg-gray-800 px-4 py-2">
         <div className="flex items-center space-x-2">
@@ -165,7 +167,7 @@ export default function BreakingNews() {
 
                 {/* Time and Category */}
                 <div className="flex items-center space-x-2">
-                  <span className="text-xs text-gray-300">{formatRelativeTime(news.timestamp)}</span>
+                  <span className="text-xs dark:text-gray-300 text-gray-800">{formatRelativeTime(news.timestamp)}</span>
                   <span className={cn("text-xs text-white px-2 py-0.5 rounded-full", getCategoryColor(news.category))}>
                     {news.category}
                   </span>
