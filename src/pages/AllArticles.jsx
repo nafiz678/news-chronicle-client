@@ -27,6 +27,8 @@ const AllArticles = () => {
         { value: 'Entertainment', label: 'Entertainment' },
         { value: 'Innovation', label: 'Innovation' },
         { value: 'Environment', label: 'Environment' },
+        { value: 'World News', label: 'World News' },
+        { value: 'Politics', label: 'Politics' },
     ];
 
     const { data: publishers = [] } = useQuery({

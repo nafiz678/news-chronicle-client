@@ -176,7 +176,6 @@ const getCategoryColorClasses = (color) => {
 
 export default function CategoryHighlights() {
   const [expandedCategories, setExpandedCategories] = useState({})
-  const [activeCategory, setActiveCategory] = useState(null)
 
   // Toggle category expansion (for mobile)
   const toggleCategory = (categoryId) => {
