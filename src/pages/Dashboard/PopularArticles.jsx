@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useQuery } from "@tanstack/react-query"
 import useAxiosPublic from "@/hooks/useAxiosPublic"
+import { Link } from "react-router-dom"
 
 
 
@@ -227,14 +228,16 @@ export default function NewsCardContainer() {
                                             <span className="text-sm font-medium text-slate-700">{article.authorName}</span>
                                         </div>
 
-                                        <Button
-                                            variant="ghost"
-                                            size="sm"
-                                            className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 -mr-2"
-                                        >
-                                            Read more
-                                            <ChevronRight className="h-4 w-4 ml-1" />
-                                        </Button>
+                                        {/* <Link to={`/article/${article._id}`}>
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 -mr-2"
+                                            >
+                                                Read more
+                                                <ChevronRight className="h-4 w-4 ml-1" />
+                                            </Button>
+                                        </Link> */}
                                     </div>
                                 </div>
                             </div>
