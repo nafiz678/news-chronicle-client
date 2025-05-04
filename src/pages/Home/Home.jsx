@@ -7,13 +7,11 @@ import NewsletterSignup from "./NewsLatter";
 import PollsSection from "./PollsSection";
 import { Testimonial } from "./Testimonial";
 import ChallengeOfTheWeek from "./WeekChallange";
+import BreakingNews from "./recent-articles/BreakingNews";
+import CategoryHighlights from "./recent-articles/HeiglightCategories";
 
 const Home = () => {
-    const stats = {
-        totalUsers: 1200,
-        normalUsers: 950,
-        premiumUsers: 250,
-    };
+
     return (
         <div>
             <Helmet>
@@ -27,7 +25,17 @@ const Home = () => {
             </div>
 
             <div>
-                <Statistic stats={stats}></Statistic>
+                <Statistic />
+            </div>
+
+            <div>
+                <AllPublishers />
+            </div>
+
+            <CategoryHighlights />
+
+            <div>
+                <ChallengeOfTheWeek />
             </div>
 
             <div>
@@ -35,20 +43,13 @@ const Home = () => {
             </div>
 
             <div>
-                <AllPublishers />
-            </div>
-
-            <div>
                 <Testimonial />
-            </div>
-
-            <div>
-                <ChallengeOfTheWeek />
             </div>
 
             <div>
                 <NewsletterSignup />
             </div>
+            <BreakingNews />
         </div>
     );
 };
