@@ -9,13 +9,14 @@ import useAuth from "@/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
+import { Loader, Loader2 } from "lucide-react";
 
 const AddArticles = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
-
+    const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         title: '',
         image: null,
@@ -68,8 +69,9 @@ const AddArticles = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here
+        
         try {
+            setIsLoading(true)
             const imageURL = await imageUpload(formData.image)
             const newData = { ...formData, image: imageURL, status: "pending", isPremium: false, views: 0, postedDate: Date.now(), authorEmail: user.email, authorName: user.displayName, authorPhoto: user.photoURL }
             
@@ -86,8 +88,10 @@ const AddArticles = () => {
             });
             navigate("/my-articles")
         } catch (error) {
-            
+            setIsLoading(false)
             toast.error(error.response.data.message)
+        } finally{
+            setIsLoading(false)
         }
     };
 
@@ -188,9 +192,9 @@ const AddArticles = () => {
                         {/* Submit Button */}
                         <button
                             type="submit"
-                            className="w-full bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 transition hover:-translate-y-[2px] hover:scale-[1.01] active:scale-100 duration-200"
+                            className="w-full bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 transition hover:-translate-y-[2px] hover:scale-[1.01] active:scale-100 duration-200 flex items-center justify-center"
                         >
-                            Submit
+                            {isLoading ? <Loader2 className="animate-spin "/> : "Submit" }
                         </button>
                     </form>
                 </div>
