@@ -194,7 +194,7 @@ export default function CategoryHighlights() {
         const isExpanded = expandedCategories[category.id] !== false // Default to expanded
 
         return (
-          <div key={category.id} className="relative">
+          <div key={category.id} className="relative ">
             {/* Category Header */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-2">
@@ -223,12 +223,12 @@ export default function CategoryHighlights() {
 
             {/* Category Content */}
             {isExpanded && (
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-3 gap-6 ">
                 {/* Featured Article */}
                 <Card
                   className={cn(
                     "col-span-3 md:col-span-1 overflow-hidden border-2 transition-all duration-300",
-                    "hover:shadow-lg cursor-pointer",
+                    "hover:shadow-lg cursor-pointer group",
                     colorClasses.hover,
                   )}
                   onClick={() => navigate("/all-articles")}
@@ -241,7 +241,7 @@ export default function CategoryHighlights() {
                     />
                     <div
                       className={cn(
-                        "absolute top-2 left-2 px-2 py-1 rounded-full text-xs text-white",
+                        "absolute top-2 left-2 px-2 py-1 rounded-full text-xs text-white hover:text-white",
                         colorClasses.badge,
                       )}
                     >
@@ -250,8 +250,8 @@ export default function CategoryHighlights() {
                   </div>
 
                   <div className="p-4">
-                    <h3 className="text-xl font-bold mb-2 line-clamp-2">{category.featured.title}</h3>
-                    <p className="text-gray-600 mb-3 line-clamp-2">{category.featured.summary}</p>
+                    <h3 className="text-xl group-hover:text-gray-900 font-bold mb-2 line-clamp-2">{category.featured.title}</h3>
+                    <p className="text-gray-600 hover:text-gray-700 mb-3 line-clamp-2">{category.featured.summary}</p>
                     <div className="flex items-center justify-between text-sm text-gray-500">
                       <span>{category.featured.author}</span>
                       <span>{formatRelativeTime(category.featured.timestamp)}</span>
@@ -267,7 +267,7 @@ export default function CategoryHighlights() {
                         key={article.id}
                         className={cn(
                           "overflow-hidden border transition-all duration-300",
-                          "hover:shadow-md cursor-pointer",
+                          "hover:shadow-md cursor-pointer group",
                           colorClasses.hover,
                         )}
                         onClick={() => navigate("/all-articles")}
@@ -279,7 +279,7 @@ export default function CategoryHighlights() {
                             className="w-full h-24 object-cover"
                           />
                           <div className="p-3 flex flex-col flex-1">
-                            <h4 className="font-semibold line-clamp-2 flex-1">{article.title}</h4>
+                            <h4 className="font-semibold line-clamp-2 flex-1 group-hover:text-gray-900">{article.title}</h4>
                             <div className="flex justify-between items-center mt-2">
                               <span className={cn("text-xs text-white px-2 py-0.5 rounded-full", colorClasses.badge)}>
                                 {category.name}
