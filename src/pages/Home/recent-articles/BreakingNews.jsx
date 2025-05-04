@@ -111,22 +111,7 @@ export default function BreakingNews() {
   }
 
   return (
-    <div className="bottom-0 w-6/12 z-50 fixed right-0 dark:bg-gray-900 bg-gray-200 rounded-lg overflow-hidden shadow-lg">
-      {/* Header */}
-      {/* <div className="flex items-center justify-between bg-gray-800 px-4 py-2">
-        <div className="flex items-center space-x-2">
-          <AlertCircle className="h-5 w-5 text-red-500 animate-pulse" />
-          <h2 className="text-white font-bold">Breaking News</h2>
-        </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setIsPaused(!isPaused)}
-          className="text-white hover:bg-gray-700"
-        >
-          {isPaused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
-        </Button>
-      </div> */}
+    <div className="bottom-0 w-6/12 z-50 hidden md:block fixed right-0 dark:bg-gray-900 bg-gray-200 rounded-lg overflow-hidden shadow-lg">
 
       {/* Ticker */}
       <div
